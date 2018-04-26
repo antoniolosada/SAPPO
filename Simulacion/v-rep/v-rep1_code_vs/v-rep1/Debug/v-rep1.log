@@ -1,0 +1,14 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (v-rep1.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  VREP_call.cpp
+f:\googledrive\toni\proy\sappo\simulacion\v-rep\v-rep1_code_vs\v-rep1\vrep_call.cpp(40): warning C4838: la conversión de 'double' en 'float' requiere una conversión de restricción
+f:\googledrive\toni\proy\sappo\simulacion\v-rep\v-rep1_code_vs\v-rep1\vrep_call.cpp(40): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+f:\googledrive\toni\proy\sappo\simulacion\v-rep\v-rep1_code_vs\v-rep1\vrep_call.cpp(45): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+f:\googledrive\toni\proy\sappo\simulacion\v-rep\v-rep1_code_vs\v-rep1\vrep_call.cpp(117): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+f:\googledrive\toni\proy\sappo\simulacion\v-rep\v-rep1_code_vs\v-rep1\vrep_call.cpp(303): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+f:\googledrive\toni\proy\sappo\simulacion\v-rep\v-rep1_code_vs\v-rep1\vrep_call.cpp(305): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+f:\googledrive\toni\proy\sappo\simulacion\v-rep\v-rep1_code_vs\v-rep1\vrep_call.cpp(306): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+f:\googledrive\toni\proy\sappo\simulacion\v-rep\v-rep1_code_vs\v-rep1\vrep_call.cpp(317): warning C4305: '=': truncamiento de 'double' a 'float'
+f:\googledrive\toni\proy\sappo\simulacion\v-rep\v-rep1_code_vs\v-rep1\vrep_call.cpp(200): warning C4101: 'direccion': variable local sin referencia
+f:\googledrive\toni\proy\sappo\simulacion\v-rep\v-rep1_code_vs\v-rep1\vrep_call.cpp(389): warning C4715: 'Espera': no todas las rutas de acceso de control devuelven un valor
+  v-rep1.vcxproj -> F:\GOOGLEDRIVE\TONI\PROY\SAPPO\Simulacion\v-rep\v-rep1_code_vs\Debug\v-repSAPPO.exe
+  v-rep1.vcxproj -> F:\GOOGLEDRIVE\TONI\PROY\SAPPO\Simulacion\v-rep\v-rep1_code_vs\Debug\v-repSAPPO.pdb (Full PDB)

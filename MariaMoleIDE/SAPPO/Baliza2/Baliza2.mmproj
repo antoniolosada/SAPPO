@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mm_project current="0" serial_port="COM40" programmer="" board="Arduino Diecimila or Duemilanove w/ ATmega168" includePaths=";$(LIBRARIES)/SPI" libPaths="" srcPaths="" libs="" useCodeAutomation="1" linkPrintfVersion="1667813" serialPortSpeed="9600" isLibrary="140">
+    <files>
+        <file name="Baliza2.cpp" open="no"/>
+        <file name="mariamole_auto_generated.h" open="no"/>
+        <file name="LowPower.cpp" open="no"/>
+        <file name="LowPower.h" open="no"/>
+    </files>
+    <externals>
+        <external name="SPI/SPI.cpp" open="no"/>
+        <external name="SPI/SPI.h" open="no"/>
+    </externals>
+</mm_project>

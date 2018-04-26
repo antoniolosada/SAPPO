@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)http://roble.uno/control-pid-barra-y-bola-arduino/ -->
+<html lang="es-ES" prefix="og: http://ogp.me/ns#" class=" js"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="./Control PID de Barra y Bola_files/cb=gapi.loaded_2" async=""></script><script src="./Control PID de Barra y Bola_files/cb=gapi.loaded_1" async=""></script><script src="./Control PID de Barra y Bola_files/cb=gapi.loaded_0" async=""></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>Control PID de Barra y Bola con Arduino - Estudio Roble</title>
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="http://roble.uno/xmlrpc.php">
+<!--[if lt IE 9]>
+<script src="http://roble.uno/wp-content/themes/iconic-one/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+
+<!-- This site is optimized with the Yoast SEO plugin v3.0.7 - https://yoast.com/wordpress/plugins/seo/ -->
+<meta name="description" content="Control PID de un sistema Barra y Bola con Arduino. VÍDEOS y CÓDIGO. Calibración del sensor. Ajuste de Kp, Kd y Ki.">
+<meta name="robots" content="noodp">
+<link rel="canonical" href="./Control PID de Barra y Bola_files/Control PID de Barra y Bola.html">
+<meta property="og:locale" content="es_ES">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Control PID de Barra y Bola con Arduino - Estudio Roble">
+<meta property="og:description" content="Control PID de un sistema Barra y Bola con Arduino. VÍDEOS y CÓDIGO. Calibración del sensor. Ajuste de Kp, Kd y Ki.">
+<meta property="og:url" content="http://roble.uno/control-pid-barra-y-bola-arduino/">
+<meta property="og:site_name" content="Estudio Roble">
+<meta property="article:tag" content="Arduino">
+<meta property="article:tag" content="Barra y Bola">
+<meta property="article:tag" content="Control PID">
+<meta property="article:tag" content="Processing">
+<meta property="article:section" content="Proyectos">
+<meta property="article:published_time" content="2015-08-18T18:31:36+00:00">
+<meta property="article:modified_time" content="2015-09-27T20:53:19+00:00">
+<meta property="og:updated_time" content="2015-09-27T20:53:19+00:00">
+<meta property="og:image" content="http://roble.uno/wp-content/uploads/2015/09/snapshot1.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:description" content="Control PID de un sistema Barra y Bola con Arduino. VÍDEOS y CÓDIGO. Calibración del sensor. Ajuste de Kp, Kd y Ki.">
+<meta name="twitter:title" content="Control PID de Barra y Bola con Arduino - Estudio Roble">
+<meta name="twitter:image" content="http://i1.wp.com/roble.uno/wp-content/uploads/2015/09/snapshot1.png?fit=563%2C315">
+<meta name="twitter:creator" content="@EstudioRoble">
+<!-- / Yoast SEO plugin. -->
+
+<link rel="alternate" type="application/rss+xml" title="Estudio Roble » Feed" href="http://roble.uno/feed/">
+<link rel="alternate" type="application/rss+xml" title="Estudio Roble » RSS de los comentarios" href="http://roble.uno/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Estudio Roble » Control PID de Barra y Bola con Arduino RSS de los comentarios" href="http://roble.uno/control-pid-barra-y-bola-arduino/feed/">
+		<script async="" src="./Control PID de Barra y Bola_files/analytics.js"></script><script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"http:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/roble.uno\/wp-includes\/js\/wp-emoji-release.min.js?ver=be144292fe80b63c94533264947fc7f4"}};
+			!function(a,b,c){function d(a){var c,d=b.createElement("canvas"),e=d.getContext&&d.getContext("2d");return e&&e.fillText?(e.textBaseline="top",e.font="600 32px Arial","flag"===a?(e.fillText(String.fromCharCode(55356,56806,55356,56826),0,0),d.toDataURL().length>3e3):"diversity"===a?(e.fillText(String.fromCharCode(55356,57221),0,0),c=e.getImageData(16,16,1,1).data.toString(),e.fillText(String.fromCharCode(55356,57221,55356,57343),0,0),c!==e.getImageData(16,16,1,1).data.toString()):("simple"===a?e.fillText(String.fromCharCode(55357,56835),0,0):e.fillText(String.fromCharCode(55356,57135),0,0),0!==e.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag"),unicode8:d("unicode8"),diversity:d("diversity")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag&&c.supports.unicode8&&c.supports.diversity||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./Control PID de Barra y Bola_files/wp-emoji-release.min.js" type="text/javascript"></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="font-awesome-css" href="./Control PID de Barra y Bola_files/font-awesome.css" type="text/css" media="screen">
+<link rel="stylesheet" id="themonic-fonts-css" href="./Control PID de Barra y Bola_files/css" type="text/css" media="all">
+<link rel="stylesheet" id="themonic-style-css" href="./Control PID de Barra y Bola_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="custom-style-css" href="./Control PID de Barra y Bola_files/custom.css" type="text/css" media="all">
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='themonic-ie-css'  href='http://roble.uno/wp-content/themes/iconic-one/css/ie.css?ver=be144292fe80b63c94533264947fc7f4' type='text/css' media='all' />
+<![endif]-->
+<link rel="stylesheet" id="genericons-css" href="./Control PID de Barra y Bola_files/genericons.css" type="text/css" media="all">
+<link rel="stylesheet" id="jetpack_css-css" href="./Control PID de Barra y Bola_files/jetpack.css" type="text/css" media="all">
+<script type="text/javascript" src="./Control PID de Barra y Bola_files/jquery.js"></script>
+<script type="text/javascript" src="./Control PID de Barra y Bola_files/jquery-migrate.min.js"></script>
+<link rel="https://api.w.org/" href="http://roble.uno/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://roble.uno/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://roble.uno/wp-includes/wlwmanifest.xml"> 
+
+<link rel="shortlink" href="http://wp.me/p6hFJN-4l">
+<link rel="alternate" type="application/json+oembed" href="http://roble.uno/wp-json/oembed/1.0/embed?url=http%3A%2F%2Froble.uno%2Fcontrol-pid-barra-y-bola-arduino%2F">
+<link rel="alternate" type="text/xml+oembed" href="http://roble.uno/wp-json/oembed/1.0/embed?url=http%3A%2F%2Froble.uno%2Fcontrol-pid-barra-y-bola-arduino%2F&amp;format=xml">
+
+<style>
+.scroll-back-to-top-wrapper {
+    position: fixed;
+	opacity: 0;
+	visibility: hidden;
+	overflow: hidden;
+	text-align: center;
+	z-index: 99999999;
+    background-color: #777777;
+	color: #eeeeee;
+	width: 50px;
+	height: 48px;
+	line-height: 48px;
+	right: 30px;
+	bottom: 30px;
+	padding-top: 2px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-ms-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+.scroll-back-to-top-wrapper:hover {
+	background-color: #888888;
+  color: #eeeeee;
+}
+.scroll-back-to-top-wrapper.show {
+    visibility:visible;
+    cursor:pointer;
+	opacity: 1.0;
+}
+.scroll-back-to-top-wrapper i.fa {
+	line-height: inherit;
+}
+.scroll-back-to-top-wrapper .fa-lg {
+	vertical-align: 0;
+}
+</style>
+<link rel="dns-prefetch" href="http://i0.wp.com/">
+<link rel="dns-prefetch" href="http://i1.wp.com/">
+<link rel="dns-prefetch" href="http://i2.wp.com/">
+<style type="text/css">img#wpstats{display:none}</style><script type="text/javascript">
+(function(url){
+	if(/(?:Chrome\/26\.0\.1410\.63 Safari\/537\.31|WordfenceTestMonBot)/.test(navigator.userAgent)){ return; }
+	var addEvent = function(evt, handler) {
+		if (window.addEventListener) {
+			document.addEventListener(evt, handler, false);
+		} else if (window.attachEvent) {
+			document.attachEvent('on' + evt, handler);
+		}
+	};
+	var removeEvent = function(evt, handler) {
+		if (window.removeEventListener) {
+			document.removeEventListener(evt, handler, false);
+		} else if (window.detachEvent) {
+			document.detachEvent('on' + evt, handler);
+		}
+	};
+	var evts = 'contextmenu dblclick drag dragend dragenter dragleave dragover dragstart drop keydown keypress keyup mousedown mousemove mouseout mouseover mouseup mousewheel scroll'.split(' ');
+	var logHuman = function() {
+		var wfscr = document.createElement('script');
+		wfscr.type = 'text/javascript';
+		wfscr.async = true;
+		wfscr.src = url + '&r=' + Math.random();
+		(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(wfscr);
+		for (var i = 0; i < evts.length; i++) {
+			removeEvent(evts[i], logHuman);
+		}
+	};
+	for (var i = 0; i < evts.length; i++) {
+		addEvent(evts[i], logHuman);
+	}
+})('//roble.uno/?wordfence_logHuman=1&hid=6521A7CC7FAE8F631F51904C3F337F44');
+</script><link rel="icon" href="http://i1.wp.com/roble.uno/wp-content/uploads/2015/06/Logo-55796b25v1_site_icon.png?fit=32%2C32" sizes="32x32">
+<link rel="icon" href="http://i1.wp.com/roble.uno/wp-content/uploads/2015/06/Logo-55796b25v1_site_icon.png?fit=192%2C192" sizes="192x192">
+<link rel="apple-touch-icon-precomposed" href="http://i1.wp.com/roble.uno/wp-content/uploads/2015/06/Logo-55796b25v1_site_icon.png?fit=180%2C180">
+<meta name="msapplication-TileImage" content="http://i1.wp.com/roble.uno/wp-content/uploads/2015/06/Logo-55796b25v1_site_icon.png?fit=270%2C270">
+
+<!-- BEGIN GADWP v4.9.1.2 Universal Tracking - https://deconf.com/google-analytics-dashboard-wordpress/ -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-64481080-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<!-- END GADWP Universal Tracking -->
+
+<link rel="stylesheet" type="text/css" id="gravatar-card-css" href="./Control PID de Barra y Bola_files/hovercard.css"><link rel="stylesheet" type="text/css" id="gravatar-card-services-css" href="./Control PID de Barra y Bola_files/services.css"><style>.gc-bubbleDefault{background-color:transparent !important;text-align:left;padding:0 !important;margin:0 !important;border:0 !important;table-layout:auto !important}.gc-reset{background-color:transparent !important;border:0 !important;padding:0 !important;margin:0 !important;text-align:left}.pls-bubbleTop{border-bottom:1px solid #ccc !important}.pls-topTail,.pls-vertShimLeft,.pls-contentLeft{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/border_3.gif) !important}.pls-topTail{background-repeat:repeat-x !important;background-position:bottom !important}.pls-vertShim{background-color:#fff !important;text-align:right}.tbl-grey .pls-vertShim{background-color:#f5f5f5 !important}.pls-vertShimLeft{background-repeat:repeat-y !important;background-position:right !important;height:4px}.pls-vertShimRight{height:4px}.pls-confirm-container .pls-vertShim{background-color:#fff3c2 !important}.pls-contentWrap{background-color:#fff !important;position:relative !important;vertical-align:top}.pls-contentLeft{background-repeat:repeat-y;background-position:right;vertical-align:top}.pls-dropRight{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleDropR_3.png) !important;background-repeat:repeat-y !important;vertical-align:top}.pls-vert,.pls-tailleft,.pls-dropTR .pls-dropBR,.pls-dropBL,.pls-vert img{vertical-align:top}.pls-dropBottom{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleDropB_3.png) !important;background-repeat:repeat-x !important;width:100%;vertical-align:top}.pls-topLeft{background:inherit !important;text-align:right;vertical-align:bottom}.pls-topRight{background:inherit !important;text-align:left;vertical-align:bottom}.pls-bottomLeft{background:inherit !important;text-align:right}.pls-bottomRight{background:inherit !important;text-align:left;vertical-align:top}.pls-tailtop,.pls-tailright,.pls-tailbottom,.pls-tailleft{display:none;position:relative}.pls-tailbottom,.pls-tailtop,.pls-tailright,.pls-tailleft,.pls-dropTR,.pls-dropBR,.pls-dropBL{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleSprite_3.png) !important;background-repeat:no-repeat}.tbl-grey .pls-tailbottom,.tbl-grey .pls-tailtop,.tbl-grey .pls-tailright,.tbl-grey .pls-tailleft,.tbl-grey .pls-dropTR,.tbl-grey .pls-dropBR,.tbl-grey .pls-dropBL{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleSprite-grey.png) !important}.pls-tailbottom{background-position:-23px 0}.pls-confirm-container .pls-tailbottom{background-position:-23px -10px}.pls-tailtop{background-position:-19px -20px}.pls-tailright{background-position:0 0}.pls-tailleft{background-position:-10px 0}.pls-tailtop{vertical-align:top}.gc-bubbleDefault td{line-height:0;font-size:0}.pls-topLeft img,.pls-topRight img,.pls-tailbottom{vertical-align:bottom}.pls-bottomLeft img,.bubbleDropTR,.pls-dropBottomL img,.pls-dropBottom img,.pls-dropBottomR img,.pls-bottomLeft{vertical-align:top}.pls-dropTR{background-position:0 -22px}.pls-dropBR{background-position:0 -27px}.pls-dropBL{background-position:0 -16px}.pls-spacertop,.pls-spacerright,.pls-spacerbottom,.pls-spacerleft{position:static !important}.pls-spinner{bottom:0;position:absolute;left:0;margin:auto;right:0;top:0} </style><script type="text/javascript" async="" src="./Control PID de Barra y Bola_files/saved_resource"></script></head>
+<body class="single single-post postid-269 single-format-standard custom-font-enabled single-author">
+<div id="page" class="hfeed site">
+	<header id="masthead" class="site-header" role="banner">
+					
+		<div class="themonic-logo">
+        <a href="http://roble.uno/" title="Estudio Roble" rel="home"><img src="./Control PID de Barra y Bola_files/Logo-y-Título-Horizontal.png" alt="Estudio Roble"></a>
+		</div>
+		
+		<div class="socialmedia">
+							<a href="https://twitter.com/EstudioRoble" target="_blank"><img src="./Control PID de Barra y Bola_files/twitter.png" alt="Follow us on Twitter"></a> 
+											<a href="https://www.facebook.com/profile.php?id=100009730118035" target="_blank"><img src="./Control PID de Barra y Bola_files/facebook.png" alt="Follow us on Facebook"></a>
+											<a href="https://plus.google.com/+EstudioRobleUno" rel="author" target="_blank"><img src="./Control PID de Barra y Bola_files/gplus.png" alt="Follow us on Google Plus"></a>
+									<a class="rss" href="http://roble.uno/feed/" target="_blank"><img src="./Control PID de Barra y Bola_files/rss.png" alt="Follow us on rss"></a>			
+					</div>
+		
+
+		
+		<nav id="site-navigation" class="themonic-nav" role="navigation">
+			<a class="assistive-text" href="http://roble.uno/control-pid-barra-y-bola-arduino/#content" title="Saltar al contenido">Saltar al contenido</a>
+			<div class="menu-main-container"><ul id="menu-top" class="nav-menu"><li id="menu-item-113" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-113"><a href="http://roble.uno/contacto-angel-espeso/">Contacto</a></li>
+<li id="menu-item-48" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-48"><a href="http://roble.uno/angel-espeso/">Sobre mí</a></li>
+</ul><select class="selectnav" id="selectnav1"><option value="">Menu</option><option value="http://roble.uno/contacto-angel-espeso/">CONTACTO</option><option value="http://roble.uno/angel-espeso/">SOBRE MÍ</option></select></div>		</nav><!-- #site-navigation -->
+		<div class="clear"></div>
+	</header><!-- #masthead -->
+
+	<div id="main" class="wrapper">	<div id="primary" class="site-content">
+		<div id="content" role="main">
+
+			
+				
+	<article id="post-269" class="post-269 post type-post status-publish format-standard has-post-thumbnail hentry category-arduino tag-arduino tag-barra-y-bola tag-control-pid tag-processing">
+				<header class="entry-header">
+						<h1 class="entry-title">Control PID de Barra y Bola con Arduino</h1>
+									
+	<div class="below-title-meta">
+		<div class="adt">
+		
+
+
+         18 agosto, 2015 
+         </div>
+		 <div class="adt-comment">
+		 <a class="link-comments" href="http://roble.uno/control-pid-barra-y-bola-arduino/#comments">18 Comments</a> 
+         </div>       
+     </div><!-- below title meta end -->
+			
+						
+			</header><!-- .entry-header -->
+
+				<div class="entry-content">
+			<p>Es fácil entender el <a href="https://es.wikipedia.org/wiki/Controlador_PID" target="_blank">Control PID</a> estudiando un sistema Barra y Bola y utilizando como Controlador un <a href="https://www.arduino.cc/" target="_blank">Arduino</a>. El objetivo es situar la bola en el centro de la barra inclinándola de forma conveniente mediante un lazo cerrado de control.</p>
+<p><iframe src="./Control PID de Barra y Bola_files/uw4nMCTBEXE.html" width="560" height="315" frameborder="0" allowfullscreen="allowfullscreen"></iframe></p>
+<p>Vídeo Resumen de 5 minutos:<br>
+<iframe src="./Control PID de Barra y Bola_files/HRJiow_k-V0.html" width="560" height="315" frameborder="0" allowfullscreen="allowfullscreen"></iframe></p>
+<h1>Sistema Barra y Bola</h1>
+<p>Es un sistema clásico en la Ingeniería de Control.</p>
+<ul>
+<li>Mediante un <strong>Sensor </strong>de distancia, medimos la posición de la bola.</li>
+<li>Con un <strong>Controlador</strong>, mediante control PID, calculamos el ángulo en el que deberíamos inclinar la barra para colocar y estabilizar la bola en el centro de la barra.</li>
+<li>Un <strong>Actuador</strong> modifica la inclinación de la barra.</li>
+</ul>
+<div id="attachment_365" style="width: 728px" class="wp-caption aligncenter"><a href="http://i1.wp.com/roble.uno/wp-content/uploads/2015/08/Sistema-Barra-y-Bola.png"><img class="wp-image-365 size-full" src="./Control PID de Barra y Bola_files/Sistema-Barra-y-Bola.png" alt="Sistema Barra y Bola" srcset="http://i1.wp.com/roble.uno/wp-content/uploads/2015/08/Sistema-Barra-y-Bola.png?resize=300%2C200 300w, http://i1.wp.com/roble.uno/wp-content/uploads/2015/08/Sistema-Barra-y-Bola.png?resize=660%2C440 660w, http://i1.wp.com/roble.uno/wp-content/uploads/2015/08/Sistema-Barra-y-Bola.png?w=718 718w" sizes="(max-width: 718px) 100vw, 718px" width="656" height="438"></a><p class="wp-caption-text">Sistema Barra y Bola</p></div>
+<h2>Sensado de la posición de la Bola</h2>
+<p>La realizamos mediante el sensor de distancia mediante luz infrarroja y&nbsp; <a href="http://position%20sensitive%20device/">detector PSD</a>: SHARP GP2Y0A21.</p>
+<div id="attachment_321" style="width: 210px" class="wp-caption aligncenter"><a href="http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/Sensor-SHARP1-e1439649429947.jpg"><img class="wp-image-321 size-medium" src="./Control PID de Barra y Bola_files/Sensor-SHARP1-e1439649429947-200x300.jpg" alt="Sensor IR de distancia" srcset="http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/Sensor-SHARP1-e1439649429947.jpg?resize=200%2C300 200w, http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/Sensor-SHARP1-e1439649429947.jpg?resize=683%2C1024 683w, http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/Sensor-SHARP1-e1439649429947.jpg?resize=660%2C990 660w" sizes="(max-width: 200px) 100vw, 200px" width="210" height="140"></a><p class="wp-caption-text">Sensor IR de distancia</p></div>
+<p>Tiene un rango de medida de 6 a 80 cm. Funciona con 5V y su salida es una tensión relacionada con la distancia medida mediante esta curva característica:</p>
+<div id="attachment_329" style="width: 675px" class="wp-caption aligncenter"><a href="http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/Curva-Sensor-SHARP.png"><img class="wp-image-329 size-large" src="./Control PID de Barra y Bola_files/Curva-Sensor-SHARP.png" alt="Curva Sensor SHARP" srcset="http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/Curva-Sensor-SHARP.png?resize=300%2C188 300w, http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/Curva-Sensor-SHARP.png?resize=1024%2C640 1024w, http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/Curva-Sensor-SHARP.png?resize=660%2C413 660w, http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/Curva-Sensor-SHARP.png?w=1212 1212w" sizes="(max-width: 665px) 100vw, 665px" width="656" height="410"></a><p class="wp-caption-text">Curva Sensor SHARP</p></div>
+<p>Si la Bola se acerca más de 6cm al sensor, la medida es errónea. Limitamos el movimiento de la bola en esa distancia.</p>
+<div id="attachment_317" style="width: 310px" class="wp-caption aligncenter"><a href="http://i1.wp.com/roble.uno/wp-content/uploads/2015/08/Freno.jpg"><img class="size-medium wp-image-317" src="./Control PID de Barra y Bola_files/Freno.jpg" alt="Freno" srcset="http://i1.wp.com/roble.uno/wp-content/uploads/2015/08/Freno.jpg?resize=300%2C200 300w, http://i1.wp.com/roble.uno/wp-content/uploads/2015/08/Freno.jpg?resize=1024%2C683 1024w, http://i1.wp.com/roble.uno/wp-content/uploads/2015/08/Freno.jpg?resize=660%2C440 660w" sizes="(max-width: 300px) 100vw, 300px" width="300" height="200"></a><p class="wp-caption-text">Freno</p></div>
+<h3>Acondicionamiento de la señal del sensor</h3>
+<p>Para filtrar (paso bajo) la señal del sensor y tener una señal más precisa y repetitiva, conectaremos un condensador electrolítico de 10μF entre la salida del sensor y tierra.</p>
+<div id="attachment_361" style="width: 970px" class="wp-caption aligncenter"><a href="http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/Efecto-del-condensador-de-filtrado.png"><img class="wp-image-361 size-full" src="./Control PID de Barra y Bola_files/Efecto-del-condensador-de-filtrado.png" alt="Efecto del condensador de filtrado" srcset="http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/Efecto-del-condensador-de-filtrado.png?resize=300%2C103 300w, http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/Efecto-del-condensador-de-filtrado.png?resize=660%2C226 660w, http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/Efecto-del-condensador-de-filtrado.png?w=960 960w" sizes="(max-width: 960px) 100vw, 960px" width="656" height="224"></a><p class="wp-caption-text">Efecto del condensador de filtrado</p></div>
+<p>Como la tensión máxima que vamos a medir es de 3,1V, configuraremos la referencia de tensión del Arduino a 3,3V mediante la instrucción:</p>
+<pre>analogReference(EXTERNAL);</pre>
+<p>y conectaremos el pin AREF con la salida de 3,3V del Arduino:</p>
+<div id="attachment_142" style="width: 207px" class="wp-caption aligncenter"><a href="http://i1.wp.com/roble.uno/wp-content/uploads/2015/06/Arduino-3V3-AREF.png"><img class="size-medium wp-image-142" src="./Control PID de Barra y Bola_files/Arduino-3V3-AREF.png" alt="Conexión de la Referencia Analógica a la salida de 3,3V" width="197" height="300"></a><p class="wp-caption-text">Conexión de la Referencia Analógica a la salida de 3,3V</p></div>
+<p>De esta forma, los 1024 puntos que nos proporciona el <a href="https://es.wikipedia.org/wiki/Conversor_de_se%C3%B1al_anal%C3%B3gica_a_digital" target="_blank">Conversor Analógico Digital</a> de 10 bit del Arduino tendrán un fondo de escala de 3,3V en lugar de los 5V por defecto. Así, incrementamos la resolución de 5mV/ADC a 3mV/ADC.</p>
+<h3>Calibración del sensor</h3>
+<p>Para relacionar la tensión proporcionada por el sensor con la distancia en centímetros, desplazaremos la bola por la barra tomando nota de la lectura en ADC. En el <a href="http://roble.uno/wp-content/uploads/2015/08/70_Barra_y_Bola_v5_MicroSegundos.zip">Software desarrollado para el Arduino</a>, se incluye un modo de funcionamiento en el que transmite continuamente las lecturas del sensor por el puerto serie:</p>
+<pre>    if(0){// Para calibrar sensor de Distancia
+      Serial.print(dist);
+      Serial.print("mm     ADC: ");    
+      Serial.println(measure); 
+    }
+</pre>
+<p>Con 9 puntos a lo largo de la barra es suficiente. Obtenemos la curva de calibración del sensor.</p>
+<div id="attachment_371" style="width: 986px" class="wp-caption aligncenter"><a href="http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/Calibraci%C3%B3n-del-Sensor-de-distancia.png"><img class="wp-image-371 size-full" src="./Control PID de Barra y Bola_files/Calibración-del-Sensor-de-distancia.png" alt="Calibración del Sensor de distancia" srcset="http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/Calibración-del-Sensor-de-distancia.png?resize=300%2C191 300w, http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/Calibración-del-Sensor-de-distancia.png?resize=660%2C421 660w, http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/Calibración-del-Sensor-de-distancia.png?w=976 976w" sizes="(max-width: 976px) 100vw, 976px" width="656" height="418"></a><p class="wp-caption-text">Calibración del Sensor de distancia</p></div>
+<p>que en el Software queda definida como:</p>
+<pre>int dcal [] = { // Calibracion de ADC a Distancia
+  -193, -160, -110, -60, 0, 40, 60, 90, 120};
+int ADCcal [] = {
+  177, 189, 231, 273, 372, 483, 558, 742, 970};</pre>
+<p>y para transformar las lecturas ADC del sensor, almacenadas en la variable <em>measure,</em> en la posición en mm de la variable <em>dist</em>, aplicamos el siguiente algoritmo:</p>
+<pre>   for(int i =0; i&lt;8; i++){ // Aplicamos curva de Calibracion de ADC a mm 
+      if (measure &gt;= ADCcal[i] &amp;&amp; measure&lt; ADCcal[i+1]){
+        dist = map(measure,ADCcal[i],ADCcal[i+1],dcal[i],dcal[i+1]);
+      }</pre>
+<p>La variable <em>dist</em> tiene valores negativos y positivos: -193mm en el extremo izquierdo de la barra, 120mm en el derecho y 0 en el centro. Como nuestro objetivo es dejar la bola en el punto central, esta variable <em>dist</em> equivale al <strong>error</strong> utilizado en la bibliografía de sistemas de control PID.</p>
+<h2>Actuador</h2>
+<p class="size-medium wp-image-326">Inclinaremos la barra con un <a href="https://es.wikipedia.org/wiki/Servomotor_de_modelismo">Servo</a> HEXTRONIK HX5010 de 6,9 kg.cm de par motor y una biela de fibra de vidrio anclada a un extremo de la barra.</p>
+<div id="attachment_332" style="width: 310px" class="wp-caption aligncenter"><a href="http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/Servo.jpg"><img class="wp-image-332 size-medium" src="./Control PID de Barra y Bola_files/Servo.jpg" alt="Actuador Servo" srcset="http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/Servo.jpg?resize=300%2C200 300w, http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/Servo.jpg?resize=1024%2C683 1024w, http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/Servo.jpg?resize=660%2C440 660w" sizes="(max-width: 300px) 100vw, 300px" width="300" height="200"></a><p class="wp-caption-text">Actuador Servo</p></div>
+<p>Como dice la <a href="https://es.wikipedia.org/wiki/Servomotor_de_modelismo" target="_blank">Wikipedia</a>, controlamos el giro del servo con pulsos de duración variable:</p>
+<div id="attachment_302" style="width: 459px" class="wp-caption aligncenter"><a href="http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/TiemposServo.svg_.png"><img class="size-full wp-image-302" src="./Control PID de Barra y Bola_files/TiemposServo.svg_.png" alt="Control de la posición del servo mediante pulsos" srcset="http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/TiemposServo.svg_.png?resize=300%2C222 300w, http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/TiemposServo.svg_.png?w=449 449w" sizes="(max-width: 449px) 100vw, 449px" width="449" height="332"></a><p class="wp-caption-text">Control de la posición del servo mediante pulsos</p></div>
+<p>En este servo en concreto la posición 0º se obtiene con pulsos de 0,5ms y el giro de 180º con 2,3ms.</p>
+<p>La biblioteca estándar (incluida en el IDE de Arduino) <a href="https://www.arduino.cc/en/Reference/Servo" target="_blank">servo</a>, incluye la instrucción <em>write(angle)</em>, siendo angle un <a href="https://www.arduino.cc/en/Reference/Int" target="_blank">integer</a> entre 0 y 180, que nos permite ajustar la posición del servo. Ésta es la instrucción que se usa habitualmente, pero como nosotros queremos la máxima precisión en el giro del servo, utilizaremos <a href="https://www.arduino.cc/en/Reference/ServoWriteMicroseconds" target="_blank">writeMicroseconds</a> en su lugar. Su sintaxis es: <em>servo.writeMicroseconds(μS)</em>, siendo <em>μS</em> los microsegundos de duración del pulso. Dispondremos de valores entre 500 (posición arriba) y 2300 (posición abajo), teniendo 1800 puntos distintos en lugar de sólo 180 usando la instrucción más básica: <em>write(angle)</em>.</p>
+<p>Durante la puesta en marcha y ajuste, calcularemos la posición de reposo (barra horizontal) con la ayuda de un nivel de burbuja.</p>
+<div id="attachment_337" style="width: 210px" class="wp-caption aligncenter"><a href="http://i0.wp.com/roble.uno/wp-content/uploads/2015/08/Nivel-de-agua-1-e1439650983925.jpg"><img class="wp-image-337 size-medium" src="./Control PID de Barra y Bola_files/Nivel-de-agua-1-e1439650983925-200x300.jpg" alt="Nivel de burbuja" srcset="http://i0.wp.com/roble.uno/wp-content/uploads/2015/08/Nivel-de-agua-1-e1439650983925.jpg?resize=200%2C300 200w, http://i0.wp.com/roble.uno/wp-content/uploads/2015/08/Nivel-de-agua-1-e1439650983925.jpg?resize=683%2C1024 683w, http://i0.wp.com/roble.uno/wp-content/uploads/2015/08/Nivel-de-agua-1-e1439650983925.jpg?resize=660%2C990 660w" sizes="(max-width: 200px) 100vw, 200px" width="210" height="140"></a><p class="wp-caption-text">Nivel de burbuja</p></div>
+<h2>Controlador</h2>
+<p>Utilizaremos un clon de Arduino con microcontrolador ATMEL ATMEGA328-PU equiparable al Arduino UNO o al antiguo Duemilanove original.</p>
+<ul>
+<li>Recibe la medida de la posición de la bola en su entrada analógica A0.</li>
+<li>Emite pulsos para controlar el servo en su salida digital 12.</li>
+<li>A través de su conexión USB envía distintos juegos de datos para debug o tramas de la forma:</li>
+</ul>
+<pre>173,173,-5,-5$ //dist,dist,vel,vel$</pre>
+<p>que son recibidas por un PC ejecutando una <a href="http://roble.uno/wp-content/uploads/2015/08/52_Barra_y_Bola.zip">aplicación desarrollada</a> en <a href="https://processing.org/" target="_blank">Processing</a> y que nos permitirá disfrutar de gráficas de la posición y la velocidad de la bola en función del tiempo como ésta:</p>
+<div id="attachment_360" style="width: 310px" class="wp-caption aligncenter"><a href="http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/Gr%C3%A1fica-de-Processing.png"><img class="size-medium wp-image-360" src="./Control PID de Barra y Bola_files/Gráfica-de-Processing.png" alt="Gráfica de Processing" srcset="http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/Gráfica-de-Processing.png?resize=300%2C248 300w, http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/Gráfica-de-Processing.png?resize=660%2C546 660w, http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/Gráfica-de-Processing.png?w=1003 1003w" sizes="(max-width: 300px) 100vw, 300px" width="300" height="248"></a><p class="wp-caption-text">Gráfica de Processing</p></div>
+<ul>
+<li>Como bonus, enciende un led conectado a la salida 13 cuando la bola está situada a menos de 8mm del centro.</li>
+</ul>
+<h2>Alimentación de 5V</h2>
+<p>El Arduino recibe los 5V necesarios para su funcionamiento a través de su conexión USB. La potencia de su pin de 5V es insufiente para alimentar el servo, por lo que lo alimentaremos con una fuente de alimentación auxiliar. ¡No olvides conectar la tierra de la fuente de alimentación auxiliar con la tierra GND del Arduino! De lo contrario, las señales de control del servo no tendrán un referencia común y no funcionará.</p>
+<h2>Esquema del sistema completo</h2>
+<div id="attachment_351" style="width: 310px" class="wp-caption aligncenter"><a href="http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/Esquema_bb.png"><img class="size-medium wp-image-351" src="./Control PID de Barra y Bola_files/Esquema_bb.png" alt="Esquema Control PID de Barra y Bola con Arduino" srcset="http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/Esquema_bb.png?resize=300%2C242 300w, http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/Esquema_bb.png?resize=1024%2C825 1024w, http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/Esquema_bb.png?resize=660%2C532 660w" sizes="(max-width: 300px) 100vw, 300px" width="300" height="242"></a><p class="wp-caption-text">Esquema Control PID de Barra y Bola con Arduino</p></div>
+<div id="attachment_328" style="width: 210px" class="wp-caption aligncenter"><a href="http://i2.wp.com/roble.uno/wp-content/uploads/2015/08/Conexiones.jpg"><img class="wp-image-328 size-medium" src="./Control PID de Barra y Bola_files/Conexiones-e1439731265361-200x300.jpg" alt="Conexiones" srcset="http://i1.wp.com/roble.uno/wp-content/uploads/2015/08/Conexiones-e1439731265361.jpg?resize=200%2C300 200w, http://i1.wp.com/roble.uno/wp-content/uploads/2015/08/Conexiones-e1439731265361.jpg?resize=683%2C1024 683w, http://i1.wp.com/roble.uno/wp-content/uploads/2015/08/Conexiones-e1439731265361.jpg?resize=660%2C990 660w" sizes="(max-width: 200px) 100vw, 200px" width="210" height="140"></a><p class="wp-caption-text">Conexiones</p></div>
+<div id="attachment_341" style="width: 210px" class="wp-caption aligncenter"><a href="http://i0.wp.com/roble.uno/wp-content/uploads/2015/08/Conexiones-Arduino-Breadboard1-e1439732566773.jpg"><img class="wp-image-341 size-medium" src="./Control PID de Barra y Bola_files/Conexiones-Arduino-Breadboard1-e1439732566773-200x300.jpg" alt="Conexiones Arduino - Breadboard" srcset="http://i0.wp.com/roble.uno/wp-content/uploads/2015/08/Conexiones-Arduino-Breadboard1-e1439732566773.jpg?resize=200%2C300 200w, http://i0.wp.com/roble.uno/wp-content/uploads/2015/08/Conexiones-Arduino-Breadboard1-e1439732566773.jpg?resize=683%2C1024 683w, http://i0.wp.com/roble.uno/wp-content/uploads/2015/08/Conexiones-Arduino-Breadboard1-e1439732566773.jpg?resize=660%2C990 660w" sizes="(max-width: 200px) 100vw, 200px" width="210" height="140"></a><p class="wp-caption-text">Conexiones Arduino – Breadboard</p></div>
+<p>&nbsp;</p>
+<h1>Control PID</h1>
+<p>Una vez que tenemos implementado el sistema físico, llega el momento de dar al controlador la inteligencia necesaria para mover la barra de forma tal que consigamos nuestro objetivo: Dejar la bola quieta en el centro de la barra.</p>
+<p>Software para Arduino: <a href="http://roble.uno/wp-content/uploads/2015/08/70_Barra_y_Bola_v5_MicroSegundos.zip">_70_Barra_y_Bola_v5_MicroSegundos</a></p>
+<h2>Período de medida y reacción</h2>
+<p>Las secuencias de medida y reacción (los ciclos de programa) no se harán tan rápido como pueda el microcontrolador, sino cada <strong>50ms</strong> (valor almacenado en la variable <em>period</em>). Lo hacemos así porque los sistemas de control PID funcionan mejor si los ciclos de medida y reacción siempre tienen la misma duración.</p>
+<p>El microcontrolador, con reloj de 16MHz, tiene velocidad suficiente para hacer el ciclo de programa en menos de 10ms. Pero con ciclos tan rápidos, la medida de la velocidad de la bola pierde precisión porque las diferencias en la posición de la bola entre ciclos son ínfimas y nosotros calculamos la velocidad de la bola como la diferencia en su posición en 2 ciclos consecutivos de programa.</p>
+<p><a href="http://i1.wp.com/roble.uno/wp-content/uploads/2015/08/Periodo-Muestro-501.png"><img class=" size-medium wp-image-358 alignleft" src="./Control PID de Barra y Bola_files/Periodo-Muestro-501.png" alt="Periodo Muestro 50" width="209" height="300"></a><a href="http://i0.wp.com/roble.uno/wp-content/uploads/2015/08/Periodo-Muestro-101.png"><img class="aligncenter size-medium wp-image-359" src="./Control PID de Barra y Bola_files/Periodo-Muestro-101.png" alt="Periodo Muestro 10" srcset="http://i0.wp.com/roble.uno/wp-content/uploads/2015/08/Periodo-Muestro-101.png?resize=256%2C300 256w, http://i0.wp.com/roble.uno/wp-content/uploads/2015/08/Periodo-Muestro-101.png?w=680 680w" sizes="(max-width: 256px) 100vw, 256px" width="256" height="300"></a></p>
+<p>Si alargamos el periodo a 100ms, la medida de la velocidad es más precisa, pero el servo funciona de una forma perceptiblemente intermitente.</p>
+<p>Tras las pruebas realizadas, un período de 50ms aporta mediciones aceptables de la velocidad de la bola y un funcionamiento del servo fluido.</p>
+<h2>Cálculo de la velocidad de la bola</h2>
+<p>En el <a href="http://roble.uno/wp-content/uploads/2015/08/70_Barra_y_Bola_v5_MicroSegundos.zip">Software que implementa el control PID en el Arduino</a> calculamos la velocidad como la diferencia entre la posición actual de la bola (variable <em>dist</em>) y la que tenía en el ciclo anterior (variable <em>lastDist</em>). Vamos a mejorar la precisión de está medida mediante un <a href="https://es.wikipedia.org/wiki/Filtro_digital" target="_blank">filtro digital de paso bajo</a> (Promediador) que consiste en obtener la media de la últimas 5 velocidades medidas. Las almacenamos en la matriz <em>v[]</em>, y las tratamos con el siguiente algoritmo en cada ciclo de programa:</p>
+<pre>  for (int i=0; i&lt;nvel-1; i++){ // Movemos todas hacia la izq 
+      v[i] =v[i+1];
+    }
+    v[nvel-1]= (dist - lastDist); // Ponemos un dato nuevo
+    vel=0;
+    for (int i=0; i&lt;nvel; i++){ // Calculamos la media
+      vel = vel+ v[i];
+    }
+    vel = vel/nvel;</pre>
+<p>El valor de la velocidad lo utilizaremos para calcular la componente Derivativa del control PID. Además lo enviamos a través del puerto serie / cable USB para que lo reciba el <a href="http://roble.uno/wp-content/uploads/2015/08/52_Barra_y_Bola.zip">software Processing</a> y nos lo represente gráficamente.</p>
+<h2><span style="text-decoration: underline;">P</span>rimera aproximación: El término Proporcional</h2>
+<p>Si de lo que se trata es de llevar la bola al centro de la barra, parece lógico que debemos inclinar la barra más, cuanto más alejada esté la bola del centro. El giro del servo, que determina la inclinación de la barra, lo determinamos con el valor de la variable <em>pos</em> que adopta valores negativos (hacia arriba):</p>
+<div id="attachment_340" style="width: 310px" class="wp-caption aligncenter"><a href="http://i0.wp.com/roble.uno/wp-content/uploads/2015/08/Arriba.jpg"><img class="wp-image-340 size-medium" src="./Control PID de Barra y Bola_files/Arriba.jpg" alt="Servo Arriba" srcset="http://i0.wp.com/roble.uno/wp-content/uploads/2015/08/Arriba.jpg?resize=300%2C200 300w, http://i0.wp.com/roble.uno/wp-content/uploads/2015/08/Arriba.jpg?resize=1024%2C683 1024w, http://i0.wp.com/roble.uno/wp-content/uploads/2015/08/Arriba.jpg?resize=660%2C440 660w" sizes="(max-width: 300px) 100vw, 300px" width="300" height="200"></a><p class="wp-caption-text">pos &lt; 0 : Servo Arriba</p></div>
+<p>y positivos (hacia abajo) a partir del valor 0 que deja la barra en horizontal:</p>
+<div id="attachment_336" style="width: 310px" class="wp-caption aligncenter"><a href="http://i1.wp.com/roble.uno/wp-content/uploads/2015/08/Abajo.jpg"><img class="size-medium wp-image-336" src="./Control PID de Barra y Bola_files/Abajo.jpg" alt="Servo Abajo" srcset="http://i1.wp.com/roble.uno/wp-content/uploads/2015/08/Abajo.jpg?resize=300%2C200 300w, http://i1.wp.com/roble.uno/wp-content/uploads/2015/08/Abajo.jpg?resize=1024%2C683 1024w, http://i1.wp.com/roble.uno/wp-content/uploads/2015/08/Abajo.jpg?resize=660%2C440 660w" sizes="(max-width: 300px) 100vw, 300px" width="300" height="200"></a><p class="wp-caption-text">pos &gt; 0 : Servo Abajo</p></div>
+<p>Como tenemos la posición de la bola en la variable <em>dist</em>, “Inclinar más la barra cuanto más lejos esté la bola del centro” se escribe en el software como:</p>
+<pre>pos=Kp*dist</pre>
+<p>siendo Kp una constante.</p>
+<p>Así ya tenemos implementado el Término Proporcional del control PID.</p>
+<p>– ¡No me digas que no es sencillo!</p>
+<p>– Sí, claro… y que valor asignamos a Kp.</p>
+<p>Para asignar un valor a Kp (como para los posteriores Kdiferencial y Kintegral) comenzaremos por asignarle un valor cualquiera: 1, 100, 235, 0.01 o el que te apetezca y observaremos el comportamiento del sistema.</p>
+<p>Estamos buscando el valor más pequeño que sea suficiente para inclinar la barra cuando la bola está cerca del objetivo pero todavía no ha llegado. Valores grandes hacen que la bola alcance demasiada velocidad y ¡luego hay que detenerla en el centro!</p>
+<p>Para el sistema construido, un valor adecuado es 2. Sólo con el término proporcional, la bola nunca se estabiliza.</p>
+<p>En el siguiente vídeo se muestran los efectos de:</p>
+<p>– Kp =1. Demasiado bajo. Con poco efecto en las proximidades del punto 0.<br>
+– Kp =100. Demasiado alto. Acelera demasiado la bola.<br>
+– Kp =2. Es adecuado para nuestro sistema.</p>
+<p><iframe src="./Control PID de Barra y Bola_files/SJwNnODKK-s.html" width="560" height="315" frameborder="0" allowfullscreen="allowfullscreen"></iframe></p>
+<h2><span style="text-decoration: underline;">D</span>eteniendo la bola: El término Diferencial</h2>
+<p>El término Diferencial opera sobre la diferencia de posiciones entre el ciclo actual y el anterior. Es decir, sobre la velocidad de la bola, ya que el tiempo transcurrido entre una medida y la siguiente es siempre el mismo. Ese tiempo es el periodo de medida y reacción y en nuestro sistema son 50ms.</p>
+<p>El término diferencial se escribe en el software como:</p>
+<pre>pos=Kd*vel</pre>
+<p>En las 3 primeras líneas de programa definimos los valores de las 3 constantes del control PID:</p>
+<pre>float Kp =0; 
+float Kd = 100;
+float Ki =0;</pre>
+<p>Lo que estamos haciendo es inclinar la barra oponiéndonos a la velocidad de la bola. Comenzamos dando un valor cualquiera a Kd.</p>
+<p>– ¿puedo darle el valor 10, que es mi número favorito?</p>
+<p>– Sí, claro. Adelante.</p>
+<p><iframe src="./Control PID de Barra y Bola_files/5bOn8aQwxW0.html" width="560" height="315" frameborder="0" allowfullscreen="allowfullscreen"></iframe></p>
+<p>Hemos puesto Kp=0 para que el término proporcional no participe y Kd=10 como punto de partida. Se observa que es un valor insuficiente porque no reacciona suficiente como para detener la bola.</p>
+<p>Subimos a Kd=100: Sobre-reacciona y el sistema es inestable.</p>
+<p>El valor correcto está entre 10 y 100. Probamos con 50, 25… observando el comportamiento del sistema bajo control Derivativo. Un valor aceptable es Kd=35.</p>
+<p>¡Conseguimos detener la bola con bastante eficacia!</p>
+<p>Nuestro objetivo es detener la bola en el punto medio. El control proporcional acerca la bola al centro inclinando la barra más cuanto más lejos esté. El control derivativo inclina la barra más cuanto más rápido se mueva la bola y consigue detenerla. Observemos ahora la acción conjunta de los 2 términos, definiendo la <em>pos</em>ición del servo como:</p>
+<pre>    pos=Kp*dist+Kd*vel;</pre>
+<p><iframe src="./Control PID de Barra y Bola_files/g71egra92EI.html" width="560" height="315" frameborder="0" allowfullscreen="allowfullscreen"></iframe></p>
+<p>¡Esto ya funciona!</p>
+<p>La acción combinada de los término Proporcional y Derivativo es un control PD, suficiente para muchas aplicaciones. Una de sus debilidades es que cuando la bola se ha detenido cerca del punto central ya no reacciona. Como la velocidad es 0, el término diferencial no actúa. Como está cerca del punto central, la inclinación de la barra por el término proporcional es pequeño y puede no ser suficiente como para que la bola se mueva. Es lo que ocurre en esta ocasión:</p>
+<p><iframe src="./Control PID de Barra y Bola_files/RYIDGxkYTC8.html" width="560" height="315" frameborder="0" allowfullscreen="allowfullscreen"></iframe></p>
+<p>Esto nunca ocurrirá en posiciones alejadas del centro porque el término proporcional ya tendría suficiente entidad como para que su inclinación haga que la bola se mueva.</p>
+<p>– ¿Incrementamos el término Proporcional?</p>
+<p>Valores altos de Kp conllevan inestabilidad en el sistema como vimos en el vídeo anterior con Kp=100.</p>
+<p>La solución es la letra que nos falta para tener un auténtico control PID: la I de Integral.</p>
+<h2><span style="text-decoration: underline;">I</span>ncrementando la precisión: El término Integral</h2>
+<p>El término Integral considera la posición de la bola (como el término Proporcional) y cuánto tiempo lleva allí. Dicho de una forma más rigurosa: De la misma manera que el término Derivativo actúa sobre la velocidad, que es la derivada de la posición de la bola a lo largo del tiempo, el término Integral actúa sobre el área que queda bajo la curva de la posición a lo largo del tiempo.</p>
+<div id="attachment_357" style="width: 728px" class="wp-caption aligncenter"><a href="http://i0.wp.com/roble.uno/wp-content/uploads/2015/08/Base-de-los-t%C3%A9rminos.png"><img class="wp-image-357 size-full" src="./Control PID de Barra y Bola_files/Base-de-los-términos.png" alt="Base de los términos" srcset="http://i0.wp.com/roble.uno/wp-content/uploads/2015/08/Base-de-los-términos.png?resize=295%2C300 295w, http://i0.wp.com/roble.uno/wp-content/uploads/2015/08/Base-de-los-términos.png?resize=660%2C671 660w, http://i0.wp.com/roble.uno/wp-content/uploads/2015/08/Base-de-los-términos.png?w=718 718w" sizes="(max-width: 718px) 100vw, 718px" width="656" height="667"></a><p class="wp-caption-text">Base de los términos</p></div>
+<p>Ese área depende del intervalo de integración. Si integramos ininterrumpidamente el área bajo la curva, el término integral sólo aporta inestabilidad en el sistema. Sólo vamos a integrar la posición de la bola cuando ésta se encuentre a menos de 4 cm del centro de la barra. Cuando esté a menos de 8 mm del centro, damos por cumplido el objetivo y dejamos de integrar. Si se sale de un intervalo reiniciamos I (I=0). Lo escribimos en el software como:</p>
+<pre>int Rint = 8;
+int Rext = 40;
+
+    if(abs(dist)&gt;Rint &amp;&amp; abs(dist)&lt;Rext){
+      I=I+dist*Ki;
+    } 
+    else {
+      I=0;
+    }
+ pos=Kp*dist+Kd*vel+I;
+</pre>
+<p>Es decir, que mientras la bola esté a menos de 4 cm y más de 8mm del centro, vamos a coger su distancia al centro, la vamos a multiplicar por Ki y el resultado lo vamos a ir acumulando en I. Cuanto más tiempo pase ahí, más grande se va a hacer I.</p>
+<p>Como conclusión, el término integral aporta más precisión pero hay que acotar convenientemente su acción porque de lo contrario conlleva demasiada inestabilidad.</p>
+<div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon sd-sharing"><h3 class="sd-title">Compártelo:</h3><div class="sd-content"><ul><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-269" class="share-twitter sd-button share-icon no-text" href="http://roble.uno/control-pid-barra-y-bola-arduino/?share=twitter&amp;nb=1" target="_blank" title="Haz clic para compartir en Twitter"><span></span><span class="sharing-screen-reader-text">Haz clic para compartir en Twitter (Se abre en una ventana nueva)</span></a></li><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-269" class="share-facebook sd-button share-icon no-text" href="http://roble.uno/control-pid-barra-y-bola-arduino/?share=facebook&amp;nb=1" target="_blank" title="Comparte en Facebook"><span><span class="share-count">173</span></span><span class="sharing-screen-reader-text">Comparte en Facebook (Se abre en una ventana nueva)<span class="share-count">173</span></span></a></li><li class="share-google-plus-1"><a rel="nofollow" data-shared="sharing-google-269" class="share-google-plus-1 sd-button share-icon no-text" href="http://roble.uno/control-pid-barra-y-bola-arduino/?share=google-plus-1&amp;nb=1" target="_blank" title="Haz clic para compartir en Google+"><span></span><span class="sharing-screen-reader-text">Haz clic para compartir en Google+ (Se abre en una ventana nueva)</span></a></li><li class="share-linkedin"><a rel="nofollow" data-shared="sharing-linkedin-269" class="share-linkedin sd-button share-icon no-text" href="http://roble.uno/control-pid-barra-y-bola-arduino/?share=linkedin&amp;nb=1" target="_blank" title="Haz clic aquí para compartir en LinkedIn"><span><span class="share-count">5</span></span><span class="sharing-screen-reader-text">Haz clic aquí para compartir en LinkedIn (Se abre en una ventana nueva)<span class="share-count">5</span></span></a></li><li class="share-email share-service-visible"><a rel="nofollow" data-shared="" class="share-email sd-button share-icon no-text" href="http://roble.uno/control-pid-barra-y-bola-arduino/?share=email&amp;nb=1" target="_blank" title="Hac clic para enviar por correo electrónico a un amigo"><span></span><span class="sharing-screen-reader-text">Hac clic para enviar por correo electrónico a un amigo (Se abre en una ventana nueva)</span></a></li><li class="share-end"></li></ul></div></div></div>					</div><!-- .entry-content -->
+		
+		<footer class="entry-meta">
+		<span>Categoría: <a href="http://roble.uno/category/arduino/" rel="category tag">Proyectos</a></span> <span>Etiquetas: <a href="http://roble.uno/tag/arduino/" rel="tag">Arduino</a>, <a href="http://roble.uno/tag/barra-y-bola/" rel="tag">Barra y Bola</a>, <a href="http://roble.uno/tag/control-pid/" rel="tag">Control PID</a>, <a href="http://roble.uno/tag/processing/" rel="tag">Processing</a></span> 
+           						</footer><!-- .entry-meta -->
+	</article><!-- #post -->
+				<nav class="nav-single">
+					<div class="assistive-text">Navegación en Entradas</div>
+					<span class="nav-previous"><a href="http://roble.uno/impresion-3d-con-doble-sentido/" rel="prev"><span class="meta-nav">←</span> Impresión 3D con Doble Sentido</a></span>
+					<span class="nav-next"><a href="http://roble.uno/gps-arduino/" rel="next">Conecta un receptor GPS a tu Arduino <span class="meta-nav">→</span></a></span>
+				</nav><!-- .nav-single -->
+
+				
+<div id="comments" class="comments-area">
+
+	
+			<h2 class="comments-title">
+			18 thoughts on “<span>Control PID de Barra y Bola con Arduino</span>”		</h2>
+
+		<ol class="commentlist">
+				<li class="comment even thread-even depth-1" id="li-comment-56">
+		<article id="comment-56" class="comment">
+			<header class="comment-meta comment-author vcard">
+				<img alt="" src="./Control PID de Barra y Bola_files/0cfadb8b6d8cabb58de0cb943c54ae30" srcset="http://0.gravatar.com/avatar/0cfadb8b6d8cabb58de0cb943c54ae30?s=60&amp;r=g 2x" class="avatar avatar-30 photo grav-hashed grav-hijack" height="30" width="30" id="grav-0cfadb8b6d8cabb58de0cb943c54ae30-0"><cite class="fn">obijuan </cite><a href="http://roble.uno/control-pid-barra-y-bola-arduino/#comment-56"><time datetime="2015-09-24T06:11:43+00:00">24 septiembre, 2015</time></a>			</header><!-- .comment-meta -->
+
+			
+			<section class="comment-content comment">
+				<p>Muchísimas gracias por el post y los vídeos!!!  Es un trabajo fantástico! Muchas gracias!  <img src="./Control PID de Barra y Bola_files/simple-smile.png" alt=":-)" class="wp-smiley" style="height: 1em; max-height: 1em;"></p>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://roble.uno/control-pid-barra-y-bola-arduino/?replytocom=56#respond" onclick="return addComment.moveForm( &quot;comment-56&quot;, &quot;56&quot;, &quot;respond&quot;, &quot;269&quot; )" aria-label="Responder a obijuan">Responder</a> <span>↓</span>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+	<ol class="children">
+	<li class="comment byuser comment-author-atreyu bypostauthor odd alt depth-2" id="li-comment-58">
+		<article id="comment-58" class="comment">
+			<header class="comment-meta comment-author vcard">
+				<img alt="" src="./Control PID de Barra y Bola_files/38c942c89026196dbeda41969a17962a" srcset="http://0.gravatar.com/avatar/38c942c89026196dbeda41969a17962a?s=60&amp;r=g 2x" class="avatar avatar-30 photo grav-hashed grav-hijack" height="30" width="30" id="grav-38c942c89026196dbeda41969a17962a-0"><cite class="fn"><a href="http://roble.uno/" rel="external nofollow" class="url">Angel Espeso</a> <span> Autor de la Entrada</span></cite><a href="http://roble.uno/control-pid-barra-y-bola-arduino/#comment-58"><time datetime="2015-09-25T16:21:09+00:00">25 septiembre, 2015</time></a>			</header><!-- .comment-meta -->
+
+			
+			<section class="comment-content comment">
+				<p>Yo soy Muy Fan de tus tutoriales de freeCAD <img src="./Control PID de Barra y Bola_files/simple-smile.png" alt=":-)" class="wp-smiley" style="height: 1em; max-height: 1em;"><br>
+<a href="https://www.youtube.com/user/obijuancube/playlists" rel="nofollow">https://www.youtube.com/user/obijuancube/playlists</a></p>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://roble.uno/control-pid-barra-y-bola-arduino/?replytocom=58#respond" onclick="return addComment.moveForm( &quot;comment-58&quot;, &quot;58&quot;, &quot;respond&quot;, &quot;269&quot; )" aria-label="Responder a Angel Espeso">Responder</a> <span>↓</span>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+	</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-57">
+		<article id="comment-57" class="comment">
+			<header class="comment-meta comment-author vcard">
+				<img alt="" src="./Control PID de Barra y Bola_files/fd160d377be2c01c4ce91e5b5d339dd4" srcset="http://0.gravatar.com/avatar/fd160d377be2c01c4ce91e5b5d339dd4?s=60&amp;r=g 2x" class="avatar avatar-30 photo grav-hashed grav-hijack" height="30" width="30" id="grav-fd160d377be2c01c4ce91e5b5d339dd4-0"><cite class="fn">Luis </cite><a href="http://roble.uno/control-pid-barra-y-bola-arduino/#comment-57"><time datetime="2015-09-24T21:13:29+00:00">24 septiembre, 2015</time></a>			</header><!-- .comment-meta -->
+
+			
+			<section class="comment-content comment">
+				<p>Me ha encantado el artículo y el proyecto.<br>
+Justo ahora acabo de empezar a estudiar en la universidad Ingenieria de Control y después de ver esto estoy deseando llegar a los PID’s.<br>
+¡Gracias!</p>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://roble.uno/control-pid-barra-y-bola-arduino/?replytocom=57#respond" onclick="return addComment.moveForm( &quot;comment-57&quot;, &quot;57&quot;, &quot;respond&quot;, &quot;269&quot; )" aria-label="Responder a Luis">Responder</a> <span>↓</span>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+	<ol class="children">
+	<li class="comment byuser comment-author-atreyu bypostauthor odd alt depth-2" id="li-comment-59">
+		<article id="comment-59" class="comment">
+			<header class="comment-meta comment-author vcard">
+				<img alt="" src="./Control PID de Barra y Bola_files/38c942c89026196dbeda41969a17962a" srcset="http://0.gravatar.com/avatar/38c942c89026196dbeda41969a17962a?s=60&amp;r=g 2x" class="avatar avatar-30 photo grav-hashed grav-hijack" height="30" width="30" id="grav-38c942c89026196dbeda41969a17962a-1"><cite class="fn"><a href="http://roble.uno/" rel="external nofollow" class="url">Angel Espeso</a> <span> Autor de la Entrada</span></cite><a href="http://roble.uno/control-pid-barra-y-bola-arduino/#comment-59"><time datetime="2015-09-25T16:23:30+00:00">25 septiembre, 2015</time></a>			</header><!-- .comment-meta -->
+
+			
+			<section class="comment-content comment">
+				<p>¡ Disfruta tus Estudios !<br>
+Son apasionantes.<br>
+Bienvenido a mi Blog Luis.</p>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://roble.uno/control-pid-barra-y-bola-arduino/?replytocom=59#respond" onclick="return addComment.moveForm( &quot;comment-59&quot;, &quot;59&quot;, &quot;respond&quot;, &quot;269&quot; )" aria-label="Responder a Angel Espeso">Responder</a> <span>↓</span>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+	</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1" id="li-comment-60">
+		<article id="comment-60" class="comment">
+			<header class="comment-meta comment-author vcard">
+				<img alt="" src="./Control PID de Barra y Bola_files/d235bd76ad212c5651f3c5c7fd431bc6" srcset="http://1.gravatar.com/avatar/d235bd76ad212c5651f3c5c7fd431bc6?s=60&amp;r=g 2x" class="avatar avatar-30 photo grav-hashed grav-hijack" height="30" width="30" id="grav-d235bd76ad212c5651f3c5c7fd431bc6-0"><cite class="fn">Francisco </cite><a href="http://roble.uno/control-pid-barra-y-bola-arduino/#comment-60"><time datetime="2015-09-25T21:37:40+00:00">25 septiembre, 2015</time></a>			</header><!-- .comment-meta -->
+
+			
+			<section class="comment-content comment">
+				<p>¡¡¡Fascinante!!! esto ayudara a explicarle a mis hijas.  Gracias…</p>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://roble.uno/control-pid-barra-y-bola-arduino/?replytocom=60#respond" onclick="return addComment.moveForm( &quot;comment-60&quot;, &quot;60&quot;, &quot;respond&quot;, &quot;269&quot; )" aria-label="Responder a Francisco">Responder</a> <span>↓</span>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+	<ol class="children">
+	<li class="comment byuser comment-author-atreyu bypostauthor odd alt depth-2" id="li-comment-61">
+		<article id="comment-61" class="comment">
+			<header class="comment-meta comment-author vcard">
+				<img alt="" src="./Control PID de Barra y Bola_files/38c942c89026196dbeda41969a17962a" srcset="http://0.gravatar.com/avatar/38c942c89026196dbeda41969a17962a?s=60&amp;r=g 2x" class="avatar avatar-30 photo grav-hashed grav-hijack" height="30" width="30" id="grav-38c942c89026196dbeda41969a17962a-2"><cite class="fn"><a href="http://roble.uno/" rel="external nofollow" class="url">Angel Espeso</a> <span> Autor de la Entrada</span></cite><a href="http://roble.uno/control-pid-barra-y-bola-arduino/#comment-61"><time datetime="2015-09-25T21:39:59+00:00">25 septiembre, 2015</time></a>			</header><!-- .comment-meta -->
+
+			
+			<section class="comment-content comment">
+				<p>¡ Qué Bueno !<br>
+Adelante.</p>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://roble.uno/control-pid-barra-y-bola-arduino/?replytocom=61#respond" onclick="return addComment.moveForm( &quot;comment-61&quot;, &quot;61&quot;, &quot;respond&quot;, &quot;269&quot; )" aria-label="Responder a Angel Espeso">Responder</a> <span>↓</span>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+	</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-64">
+		<article id="comment-64" class="comment">
+			<header class="comment-meta comment-author vcard">
+				<img alt="" src="./Control PID de Barra y Bola_files/1e866d71d0c4e823511d7b3cc791c548" srcset="http://1.gravatar.com/avatar/1e866d71d0c4e823511d7b3cc791c548?s=60&amp;r=g 2x" class="avatar avatar-30 photo grav-hashed grav-hijack" height="30" width="30" id="grav-1e866d71d0c4e823511d7b3cc791c548-0"><cite class="fn">Toni Vera </cite><a href="http://roble.uno/control-pid-barra-y-bola-arduino/#comment-64"><time datetime="2015-09-26T17:49:39+00:00">26 septiembre, 2015</time></a>			</header><!-- .comment-meta -->
+
+			
+			<section class="comment-content comment">
+				<p>¡¡ IMPRESIONANTE !! Me ha encantado tú video, después de muchos años me he vuelto a lanzar a estudiar Ingeniería Electrónica y Automática, y este tipo de cosas me ayudan a saber porque me reenganche a este mundo tan apasionante.</p>
+<p>Te seguiré en tus futuros trabajos.</p>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://roble.uno/control-pid-barra-y-bola-arduino/?replytocom=64#respond" onclick="return addComment.moveForm( &quot;comment-64&quot;, &quot;64&quot;, &quot;respond&quot;, &quot;269&quot; )" aria-label="Responder a Toni Vera">Responder</a> <span>↓</span>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+	<ol class="children">
+	<li class="comment byuser comment-author-atreyu bypostauthor odd alt depth-2" id="li-comment-65">
+		<article id="comment-65" class="comment">
+			<header class="comment-meta comment-author vcard">
+				<img alt="" src="./Control PID de Barra y Bola_files/38c942c89026196dbeda41969a17962a" srcset="http://0.gravatar.com/avatar/38c942c89026196dbeda41969a17962a?s=60&amp;r=g 2x" class="avatar avatar-30 photo grav-hashed grav-hijack" height="30" width="30" id="grav-38c942c89026196dbeda41969a17962a-3"><cite class="fn"><a href="http://roble.uno/" rel="external nofollow" class="url">Angel Espeso</a> <span> Autor de la Entrada</span></cite><a href="http://roble.uno/control-pid-barra-y-bola-arduino/#comment-65"><time datetime="2015-09-26T17:56:49+00:00">26 septiembre, 2015</time></a>			</header><!-- .comment-meta -->
+
+			
+			<section class="comment-content comment">
+				<p>¡ Qué bueno Toni !</p>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://roble.uno/control-pid-barra-y-bola-arduino/?replytocom=65#respond" onclick="return addComment.moveForm( &quot;comment-65&quot;, &quot;65&quot;, &quot;respond&quot;, &quot;269&quot; )" aria-label="Responder a Angel Espeso">Responder</a> <span>↓</span>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+	</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1" id="li-comment-66">
+		<article id="comment-66" class="comment">
+			<header class="comment-meta comment-author vcard">
+				<img alt="" src="./Control PID de Barra y Bola_files/db5f07104c1afafc32bb466b785caf2c" srcset="http://1.gravatar.com/avatar/db5f07104c1afafc32bb466b785caf2c?s=60&amp;r=g 2x" class="avatar avatar-30 photo grav-hashed grav-hijack" height="30" width="30" id="grav-db5f07104c1afafc32bb466b785caf2c-0"><cite class="fn">pedrolas </cite><a href="http://roble.uno/control-pid-barra-y-bola-arduino/#comment-66"><time datetime="2015-09-27T20:10:39+00:00">27 septiembre, 2015</time></a>			</header><!-- .comment-meta -->
+
+			
+			<section class="comment-content comment">
+				<p>Muy bueno el proyecto y muy bien explicado.<br>
+Te seguiré.</p>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://roble.uno/control-pid-barra-y-bola-arduino/?replytocom=66#respond" onclick="return addComment.moveForm( &quot;comment-66&quot;, &quot;66&quot;, &quot;respond&quot;, &quot;269&quot; )" aria-label="Responder a pedrolas">Responder</a> <span>↓</span>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+	<ol class="children">
+	<li class="comment byuser comment-author-atreyu bypostauthor odd alt depth-2" id="li-comment-67">
+		<article id="comment-67" class="comment">
+			<header class="comment-meta comment-author vcard">
+				<img alt="" src="./Control PID de Barra y Bola_files/38c942c89026196dbeda41969a17962a" srcset="http://0.gravatar.com/avatar/38c942c89026196dbeda41969a17962a?s=60&amp;r=g 2x" class="avatar avatar-30 photo grav-hashed grav-hijack" height="30" width="30" id="grav-38c942c89026196dbeda41969a17962a-4"><cite class="fn"><a href="http://roble.uno/" rel="external nofollow" class="url">Angel Espeso</a> <span> Autor de la Entrada</span></cite><a href="http://roble.uno/control-pid-barra-y-bola-arduino/#comment-67"><time datetime="2015-09-27T20:13:31+00:00">27 septiembre, 2015</time></a>			</header><!-- .comment-meta -->
+
+			
+			<section class="comment-content comment">
+				<p>¡ Gracias !<br>
+Bienvenido Pedro.</p>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://roble.uno/control-pid-barra-y-bola-arduino/?replytocom=67#respond" onclick="return addComment.moveForm( &quot;comment-67&quot;, &quot;67&quot;, &quot;respond&quot;, &quot;269&quot; )" aria-label="Responder a Angel Espeso">Responder</a> <span>↓</span>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+	</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-68">
+		<article id="comment-68" class="comment">
+			<header class="comment-meta comment-author vcard">
+				<img alt="" src="./Control PID de Barra y Bola_files/a2d2a0126a944a67a9a59177d674a1ef" srcset="http://1.gravatar.com/avatar/a2d2a0126a944a67a9a59177d674a1ef?s=60&amp;r=g 2x" class="avatar avatar-30 photo grav-hashed grav-hijack" height="30" width="30" id="grav-a2d2a0126a944a67a9a59177d674a1ef-0"><cite class="fn"><a href="http://ardumania.es/" rel="external nofollow" class="url">Josemanu</a> </cite><a href="http://roble.uno/control-pid-barra-y-bola-arduino/#comment-68"><time datetime="2015-10-07T17:44:43+00:00">7 octubre, 2015</time></a>			</header><!-- .comment-meta -->
+
+			
+			<section class="comment-content comment">
+				<p>Enhorabuena por el tutorial, es fantástico.</p>
+<p>Yo se muy bien lo que es escribir tutoriales (por eso los mios son mas cortos) así que aprecio de veras el esfuerzo que has hecho con este, está muy bien documentado. </p>
+<p>Voy a poner un enlace desde mi web a la tuya.</p>
+<p>Animo y sigue adelante escribiendo más tutoriales.</p>
+<p>Un saludo.</p>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://roble.uno/control-pid-barra-y-bola-arduino/?replytocom=68#respond" onclick="return addComment.moveForm( &quot;comment-68&quot;, &quot;68&quot;, &quot;respond&quot;, &quot;269&quot; )" aria-label="Responder a Josemanu">Responder</a> <span>↓</span>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+	<ol class="children">
+	<li class="comment byuser comment-author-atreyu bypostauthor odd alt depth-2" id="li-comment-70">
+		<article id="comment-70" class="comment">
+			<header class="comment-meta comment-author vcard">
+				<img alt="" src="./Control PID de Barra y Bola_files/38c942c89026196dbeda41969a17962a" srcset="http://0.gravatar.com/avatar/38c942c89026196dbeda41969a17962a?s=60&amp;r=g 2x" class="avatar avatar-30 photo grav-hashed grav-hijack" height="30" width="30" id="grav-38c942c89026196dbeda41969a17962a-5"><cite class="fn"><a href="http://roble.uno/" rel="external nofollow" class="url">Angel Espeso</a> <span> Autor de la Entrada</span></cite><a href="http://roble.uno/control-pid-barra-y-bola-arduino/#comment-70"><time datetime="2015-10-07T17:56:23+00:00">7 octubre, 2015</time></a>			</header><!-- .comment-meta -->
+
+			
+			<section class="comment-content comment">
+				<p>¡ Gracias <a href="http://www.ardumania.es/" rel="nofollow">http://www.ardumania.es</a> !</p>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://roble.uno/control-pid-barra-y-bola-arduino/?replytocom=70#respond" onclick="return addComment.moveForm( &quot;comment-70&quot;, &quot;70&quot;, &quot;respond&quot;, &quot;269&quot; )" aria-label="Responder a Angel Espeso">Responder</a> <span>↓</span>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+	</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1" id="li-comment-85">
+		<article id="comment-85" class="comment">
+			<header class="comment-meta comment-author vcard">
+				<img alt="" src="./Control PID de Barra y Bola_files/abac0be3adbbda62b632fd0a2b2a2173" srcset="http://1.gravatar.com/avatar/abac0be3adbbda62b632fd0a2b2a2173?s=60&amp;r=g 2x" class="avatar avatar-30 photo grav-hashed grav-hijack" height="30" width="30" id="grav-abac0be3adbbda62b632fd0a2b2a2173-0"><cite class="fn">Martin Arias </cite><a href="http://roble.uno/control-pid-barra-y-bola-arduino/#comment-85"><time datetime="2015-12-04T19:47:09+00:00">4 diciembre, 2015</time></a>			</header><!-- .comment-meta -->
+
+			
+			<section class="comment-content comment">
+				<p>La verdad que buen proyecto y muy interesante la verdad. Sigue así, te ganaste un fan. Saludos!!!</p>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://roble.uno/control-pid-barra-y-bola-arduino/?replytocom=85#respond" onclick="return addComment.moveForm( &quot;comment-85&quot;, &quot;85&quot;, &quot;respond&quot;, &quot;269&quot; )" aria-label="Responder a Martin Arias">Responder</a> <span>↓</span>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+	<ol class="children">
+	<li class="comment byuser comment-author-post odd alt depth-2" id="li-comment-86">
+		<article id="comment-86" class="comment">
+			<header class="comment-meta comment-author vcard">
+				<img alt="" src="./Control PID de Barra y Bola_files/56edeea3e7e1d93800187c5720fc3e96" srcset="http://2.gravatar.com/avatar/56edeea3e7e1d93800187c5720fc3e96?s=60&amp;r=g 2x" class="avatar avatar-30 photo grav-hashed grav-hijack" height="30" width="30" id="grav-56edeea3e7e1d93800187c5720fc3e96-0"><cite class="fn">Post </cite><a href="http://roble.uno/control-pid-barra-y-bola-arduino/#comment-86"><time datetime="2015-12-04T19:57:36+00:00">4 diciembre, 2015</time></a>			</header><!-- .comment-meta -->
+
+			
+			<section class="comment-content comment">
+				<p>¡Muchas Gracias Martin!<br>
+Un fuerte abrazo.</p>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://roble.uno/control-pid-barra-y-bola-arduino/?replytocom=86#respond" onclick="return addComment.moveForm( &quot;comment-86&quot;, &quot;86&quot;, &quot;respond&quot;, &quot;269&quot; )" aria-label="Responder a Post">Responder</a> <span>↓</span>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+	</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-87">
+		<article id="comment-87" class="comment">
+			<header class="comment-meta comment-author vcard">
+				<img alt="" src="./Control PID de Barra y Bola_files/634b4f775ef334424c6cb19fbf34c7a6" srcset="http://0.gravatar.com/avatar/634b4f775ef334424c6cb19fbf34c7a6?s=60&amp;r=g 2x" class="avatar avatar-30 photo grav-hashed grav-hijack" height="30" width="30" id="grav-634b4f775ef334424c6cb19fbf34c7a6-0"><cite class="fn">Antonio </cite><a href="http://roble.uno/control-pid-barra-y-bola-arduino/#comment-87"><time datetime="2015-12-09T21:28:48+00:00">9 diciembre, 2015</time></a>			</header><!-- .comment-meta -->
+
+			
+			<section class="comment-content comment">
+				<p>Me gusto mucho la explicacion de casa una de las combinaciones de los controladores P,I y D, gracias por el video.</p>
+<p>Tengo una duda, si utilizara un sensor ultrasonico HC-SR04 en vez del sensor optico, afectaria la velocidad del sensado de la distancia, para el control PID?</p>
+<p>Gracias por todo</p>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://roble.uno/control-pid-barra-y-bola-arduino/?replytocom=87#respond" onclick="return addComment.moveForm( &quot;comment-87&quot;, &quot;87&quot;, &quot;respond&quot;, &quot;269&quot; )" aria-label="Responder a Antonio">Responder</a> <span>↓</span>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+	<ol class="children">
+	<li class="comment byuser comment-author-post odd alt depth-2" id="li-comment-88">
+		<article id="comment-88" class="comment">
+			<header class="comment-meta comment-author vcard">
+				<img alt="" src="./Control PID de Barra y Bola_files/56edeea3e7e1d93800187c5720fc3e96" srcset="http://2.gravatar.com/avatar/56edeea3e7e1d93800187c5720fc3e96?s=60&amp;r=g 2x" class="avatar avatar-30 photo grav-hashed grav-hijack" height="30" width="30" id="grav-56edeea3e7e1d93800187c5720fc3e96-1"><cite class="fn">Angel Espeso </cite><a href="http://roble.uno/control-pid-barra-y-bola-arduino/#comment-88"><time datetime="2015-12-09T22:03:18+00:00">9 diciembre, 2015</time></a>			</header><!-- .comment-meta -->
+
+			
+			<section class="comment-content comment">
+				<p>Puedes utilizar un HC-SR04 sin inconvenientes.</p>
+<p>¡Saludos Antonio!</p>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://roble.uno/control-pid-barra-y-bola-arduino/?replytocom=88#respond" onclick="return addComment.moveForm( &quot;comment-88&quot;, &quot;88&quot;, &quot;respond&quot;, &quot;269&quot; )" aria-label="Responder a Angel Espeso">Responder</a> <span>↓</span>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+	</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1" id="li-comment-92">
+		<article id="comment-92" class="comment">
+			<header class="comment-meta comment-author vcard">
+				<img alt="" src="./Control PID de Barra y Bola_files/22a0ff3cea8726907c988291bb48905c" srcset="http://2.gravatar.com/avatar/22a0ff3cea8726907c988291bb48905c?s=60&amp;r=g 2x" class="avatar avatar-30 photo grav-hashed grav-hijack" height="30" width="30" id="grav-22a0ff3cea8726907c988291bb48905c-0"><cite class="fn">juan pablo morales </cite><a href="http://roble.uno/control-pid-barra-y-bola-arduino/#comment-92"><time datetime="2016-01-10T00:41:30+00:00">10 enero, 2016</time></a>			</header><!-- .comment-meta -->
+
+			
+			<section class="comment-content comment">
+				<p>Hola angel! como estas? estoy interesado en realizar el sistema bola-viga que tu realizaste.Te quería preguntar si lo que usaste como bola es una pelota de pig-pong?tiene el suficiente peso como para hacer pivotar la barra? y te quería preguntar si me podes pasar la información de otro sensor de posición infrarrojo alternativo al que tu usaste ya que en mi país (Argentina) no lo consigo.Muchas gracias!!</p>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://roble.uno/control-pid-barra-y-bola-arduino/?replytocom=92#respond" onclick="return addComment.moveForm( &quot;comment-92&quot;, &quot;92&quot;, &quot;respond&quot;, &quot;269&quot; )" aria-label="Responder a juan pablo morales">Responder</a> <span>↓</span>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+	<ol class="children">
+	<li class="comment byuser comment-author-atreyu bypostauthor odd alt depth-2" id="li-comment-95">
+		<article id="comment-95" class="comment">
+			<header class="comment-meta comment-author vcard">
+				<img alt="" src="./Control PID de Barra y Bola_files/38c942c89026196dbeda41969a17962a" srcset="http://0.gravatar.com/avatar/38c942c89026196dbeda41969a17962a?s=60&amp;r=g 2x" class="avatar avatar-30 photo grav-hashed grav-hijack" height="30" width="30" id="grav-38c942c89026196dbeda41969a17962a-6"><cite class="fn"><a href="http://roble.uno/" rel="external nofollow" class="url">Angel Espeso</a> <span> Autor de la Entrada</span></cite><a href="http://roble.uno/control-pid-barra-y-bola-arduino/#comment-95"><time datetime="2016-01-11T19:35:37+00:00">11 enero, 2016</time></a>			</header><!-- .comment-meta -->
+
+			
+			<section class="comment-content comment">
+				<p>Hola Juan Pablo,<br>
+Sí, utilicé una pelota de ping-pong ordinaria.<br>
+Puedes utilizar cualquier sistema de sensado de posición. El infrarrojo del post lo tienes disponible en:<br>
+<a href="http://es.farnell.com/sharp/gp2y0a21yk0f/sensor-distancia-anal-gico/dp/1243869" rel="nofollow">http://es.farnell.com/sharp/gp2y0a21yk0f/sensor-distancia-anal-gico/dp/1243869</a><br>
+Pero puedes utilizar cualquier otro, el de ultrasonidos: HC-SR04 o incluso puedes utilizar 2 hilos resistivos a lo largo de una viga de material aislante y una bola metálica que pise ambos y forme un potenciómetro con resistencia dependiente de la posición de la bola.<br>
+¡Adelante!</p>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="http://roble.uno/control-pid-barra-y-bola-arduino/?replytocom=95#respond" onclick="return addComment.moveForm( &quot;comment-95&quot;, &quot;95&quot;, &quot;respond&quot;, &quot;269&quot; )" aria-label="Responder a Angel Espeso">Responder</a> <span>↓</span>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+	</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		</ol><!-- .commentlist -->
+
+		
+		
+	
+					<div id="respond" class="comment-respond">
+			<h3 id="reply-title" class="comment-reply-title">Deja un comentario <small><a rel="nofollow" id="cancel-comment-reply-link" href="http://roble.uno/control-pid-barra-y-bola-arduino/#respond" style="display:none;">Cancelar respuesta</a></small></h3>				<form action="http://roble.uno/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+					<p class="comment-notes"><span id="email-notes">Tu dirección de correo electrónico no será publicada.</span> Los campos necesarios están marcados <span class="required">*</span></p><p class="comment-form-comment"><label for="comment">Comentario</label> <textarea id="comment" name="comment" cols="45" rows="8" aria-required="true" required="required"></textarea></p><p class="comment-form-author"><label for="author">Nombre <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" aria-required="true" required="required"></p>
+<p class="comment-form-email"><label for="email">Correo electrónico <span class="required">*</span></label> <input id="email" name="email" type="text" value="" size="30" aria-describedby="email-notes" aria-required="true" required="required"></p>
+<p class="comment-form-url"><label for="url">Web</label> <input id="url" name="url" type="text" value="" size="30"></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Publicar comentario"> <input type="hidden" name="comment_post_ID" value="269" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="e24d331a89"></p><p class="comment-subscription-form"><input type="checkbox" name="subscribe_comments" id="subscribe_comments" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;"> <label class="subscribe-label" id="subscribe-label" for="subscribe_comments">Recibir un email con los siguientes comentarios a esta entrada.</label></p><p class="comment-subscription-form"><input type="checkbox" name="subscribe_blog" id="subscribe_blog" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;"> <label class="subscribe-label" id="subscribe-blog-label" for="subscribe_blog">Recibir un email con cada nueva entrada.</label></p><p style="display: none;"></p>				<input type="hidden" id="ak_js" name="ak_js" value="1452869561803"></form>
+					</div><!-- #respond -->
+		
+</div><!-- #comments .comments-area -->
+			
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+			<aside id="text-3" class="widget widget_text"><p class="widget-title">Suscríbete al Canal</p>			<div class="textwidget"><script src="./Control PID de Barra y Bola_files/platform.js" gapi_processed="true"></script>
+
+<div id="___ytsubscribe_0" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 118px; height: 24px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 118px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 24px;" tabindex="0" vspace="0" width="100%" id="I0_1452869562288" name="I0_1452869562288" src="./Control PID de Barra y Bola_files/subscribe_embed.html" data-gapiattached="true"></iframe></div></div>
+		</aside><aside id="tag_cloud-2" class="widget widget_tag_cloud"><p class="widget-title">Nube de Etiquetas</p><div class="tagcloud"><a href="http://roble.uno/tag/arduino/" class="tag-link-5" title="3 temas" style="font-size: 22pt;">Arduino</a>
+<a href="http://roble.uno/tag/barra-y-bola/" class="tag-link-20" title="1 tema" style="font-size: 8pt;">Barra y Bola</a>
+<a href="http://roble.uno/tag/coche/" class="tag-link-25" title="1 tema" style="font-size: 8pt;">Coche</a>
+<a href="http://roble.uno/tag/control-pid/" class="tag-link-21" title="1 tema" style="font-size: 8pt;">Control PID</a>
+<a href="http://roble.uno/tag/freecad/" class="tag-link-19" title="1 tema" style="font-size: 8pt;">FreeCAD</a>
+<a href="http://roble.uno/tag/gps/" class="tag-link-24" title="1 tema" style="font-size: 8pt;">GPS</a>
+<a href="http://roble.uno/tag/impresion-3d/" class="tag-link-18" title="1 tema" style="font-size: 8pt;">Impresión 3D</a>
+<a href="http://roble.uno/tag/lcd/" class="tag-link-23" title="2 temas" style="font-size: 16.4pt;">LCD</a>
+<a href="http://roble.uno/tag/logger/" class="tag-link-15" title="1 tema" style="font-size: 8pt;">Logger</a>
+<a href="http://roble.uno/tag/pilas/" class="tag-link-14" title="1 tema" style="font-size: 8pt;">Pilas</a>
+<a href="http://roble.uno/tag/processing/" class="tag-link-22" title="1 tema" style="font-size: 8pt;">Processing</a>
+<a href="http://roble.uno/tag/sd/" class="tag-link-16" title="1 tema" style="font-size: 8pt;">SD</a></div>
+</aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	<footer id="colophon" role="contentinfo">
+		<div class="site-info">
+		<div class="footercopy">Estudio Roble 2016</div>
+		<div class="footercredit"></div>
+		<div class="clear"></div>
+		</div><!-- .site-info -->
+		</footer><!-- #colophon -->
+		<div class="site-wordpress">
+				
+				</div><!-- .site-info -->
+				<div class="clear"></div>
+</div><!-- #page -->
+
+<div class="scroll-back-to-top-wrapper show">
+	<span class="scroll-back-to-top-inner">
+					<i class="fa fa-2x fa-arrow-circle-up"></i>
+			</span>
+</div>	<div style="display:none">
+	<div class="grofile-hash-map-0cfadb8b6d8cabb58de0cb943c54ae30">
+	</div>
+	<div class="grofile-hash-map-38c942c89026196dbeda41969a17962a">
+	</div>
+	<div class="grofile-hash-map-fd160d377be2c01c4ce91e5b5d339dd4">
+	</div>
+	<div class="grofile-hash-map-d235bd76ad212c5651f3c5c7fd431bc6">
+	</div>
+	<div class="grofile-hash-map-1e866d71d0c4e823511d7b3cc791c548">
+	</div>
+	<div class="grofile-hash-map-db5f07104c1afafc32bb466b785caf2c">
+	</div>
+	<div class="grofile-hash-map-a2d2a0126a944a67a9a59177d674a1ef">
+	</div>
+	<div class="grofile-hash-map-4e8d7b75f94f8bbc22a324159d161668">
+	</div>
+	<div class="grofile-hash-map-56edeea3e7e1d93800187c5720fc3e96">
+	</div>
+	<div class="grofile-hash-map-634b4f775ef334424c6cb19fbf34c7a6">
+	</div>
+	<div class="grofile-hash-map-22a0ff3cea8726907c988291bb48905c">
+	</div>
+	</div>
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"http:\/\/roble.uno\/control-pid-barra-y-bola-arduino\/":269};
+	</script>
+		<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-twitter' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-facebook' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-google-plus-1' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomgoogle-plus-1', 'menubar=1,resizable=1,width=480,height=550' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-linkedin' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomlinkedin', 'menubar=1,resizable=1,width=580,height=450' );
+				return false;
+			});
+		});
+		</script>
+			
+<script type="text/javascript" src="./Control PID de Barra y Bola_files/form.js"></script>
+<script type="text/javascript" src="./Control PID de Barra y Bola_files/photon.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var scrollBackToTop = {"scrollDuration":"500","fadeDuration":"0.5"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Control PID de Barra y Bola_files/scroll-back-to-top.js"></script>
+<script type="text/javascript" src="./Control PID de Barra y Bola_files/devicepx-jetpack.js"></script>
+<script type="text/javascript" src="./Control PID de Barra y Bola_files/gprofiles.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Control PID de Barra y Bola_files/wpgroho.js"></script>
+<script type="text/javascript" src="./Control PID de Barra y Bola_files/comment-reply.min.js"></script>
+<script type="text/javascript" src="./Control PID de Barra y Bola_files/selectnav.js"></script>
+<script type="text/javascript" src="./Control PID de Barra y Bola_files/wp-embed.min.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Control PID de Barra y Bola_files/sharing.js"></script>
+<script type="text/javascript" src="./Control PID de Barra y Bola_files/e-201602.js" async="" defer=""></script>
+<script type="text/javascript">
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:3.8.2',blog:'92870035',post:'269',tz:'0',srv:'roble.uno'} ]);
+	_stq.push([ 'clickTrackerInit', '92870035', '269' ]);
+</script>
+
+<div id="sharing_email" style="display: none;">
+		<form action="./Control PID de Barra y Bola_files/Control PID de Barra y Bola.html" method="post">
+			<label for="target_email">Enviar a dirección de correo electrónico</label>
+			<input type="email" name="target_email" id="target_email" value="">
+
+			
+				<label for="source_name">Su Nombre</label>
+				<input type="text" name="source_name" id="source_name" value="">
+
+				<label for="source_email">Tu dirección de correo electrónico</label>
+				<input type="email" name="source_email" id="source_email" value="">
+
+						<input type="text" id="jetpack-source_f_name" name="source_f_name" class="input" value="" size="25" autocomplete="off">
+			<script> document.getElementById('jetpack-source_f_name').value = ''; </script>
+			
+			<img style="float: right; display: none" class="loading" src="./Control PID de Barra y Bola_files/loading.gif" alt="loading" width="16" height="16">
+			<input type="submit" value="Enviar correo electrónico" class="sharing_send">
+			<a rel="nofollow" href="http://roble.uno/control-pid-barra-y-bola-arduino/#cancel" class="sharing_cancel">Cancelar</a>
+
+			<div class="errors errors-1" style="display: none;">
+				La entrada no fue enviada. ¡Comprueba tus direcciones de correo electrónico!			</div>
+
+			<div class="errors errors-2" style="display: none;">
+				Error en la comprobación de email. Por favor, vuelve a intentarlo			</div>
+
+			<div class="errors errors-3" style="display: none;">
+				Lo sentimos, tu blog no puede compartir entradas por correo electrónico.			</div>
+		</form>
+	</div><img src="./Control PID de Barra y Bola_files/g.gif" id="wpstats"><iframe name="oauth2relay803836022" id="oauth2relay803836022" src="./Control PID de Barra y Bola_files/postmessageRelay.html" tabindex="-1" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe><div style="display: block; visibility: hidden; position: absolute; width: 106px; left: -10000px; top: -10000px;"><table cellpadding="0" cellspacing="0" dir="ltr" style="width:106px;" frame="void" rules="none" class=" gc-bubbleDefault pls-container"><tbody><tr class="gc-reset"><td class="pls-topLeft gc-reset"><img class="gc-reset" style="width:1px !important; height:1px !important; max-width: 1px !important; max-height: 1px !important;" src="./Control PID de Barra y Bola_files/border_3.gif"></td><td class="pls-topTail gc-reset"><img class="pls-tailbottom gc-reset" style="width:15px !important; height:9px !important; max-width: 15px !important; max-height: 9px !important;" src="./Control PID de Barra y Bola_files/spacer.gif"><img class="pls-spacerbottom gc-reset" style="width:1px !important; height:1px !important; max-width: 1px !important; max-height: 1px !important;" src="./Control PID de Barra y Bola_files/spacer.gif"></td><td class="pls-topRight gc-reset"><img class="gc-reset" style="width:1px !important; height:1px !important; max-width: 1px !important; max-height: 1px !important;" src="./Control PID de Barra y Bola_files/border_3.gif"></td></tr><tr class="gc-reset"><td class="pls-vertShimLeft gc-reset"><img class="gc-reset" style="width:1px !important; height:4px !important; max-width: 1px !important; max-height: 4px !important;" src="./Control PID de Barra y Bola_files/spacer.gif"></td><td class="pls-vertShim gc-reset"><img class="gc-reset" style="width:1px !important; height:4px !important; max-width: 1px !important; max-height: 4px !important;" src="./Control PID de Barra y Bola_files/spacer.gif"></td><td class="pls-vertShimRight gc-reset"><img class="pls-dropTR gc-reset" style="width:5px !important; height:4px !important; max-width: 5px !important; max-height: 4px !important;" src="./Control PID de Barra y Bola_files/spacer.gif"></td></tr><tr class="gc-reset"><td class="pls-contentLeft gc-reset"><img class="pls-tailright gc-reset" style="width:9px !important; height:15px !important; max-width: 9px !important; max-height: 15px !important;" src="./Control PID de Barra y Bola_files/spacer.gif"><img class="pls-spacerright gc-reset" style="width:1px !important; height:1px !important; max-width: 1px !important; max-height: 1px !important;" src="./Control PID de Barra y Bola_files/spacer.gif"></td><td class="pls-contentWrap gc-reset"><div class="goog-bubble-content gc-reset"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="margin:0px;position:absolute;z-index:1;border-style:none;outline:none;width:100px;" tabindex="0" vspace="0" width="100%" id="I0_1452869564707" name="I0_1452869564707" src="./Control PID de Barra y Bola_files/subscribe_embed(1).html"></iframe></div></td><td class="pls-dropRight gc-reset"><img class="pls-tailleft gc-reset" style="width:12px !important; height:19px !important; max-width: 12px !important; max-height: 19px !important;" src="./Control PID de Barra y Bola_files/spacer.gif"><img class="pls-spacerleft gc-reset" style="width:1px !important; height:1px !important; max-width: 1px !important; max-height: 1px !important;" src="./Control PID de Barra y Bola_files/spacer.gif"></td></tr><tr class="gc-reset"><td class="pls-bottomLeft gc-reset"><img class="gc-reset" style="width:1px !important; height:1px !important; max-width: 1px !important; max-height: 1px !important;" src="./Control PID de Barra y Bola_files/border_3.gif"></td><td class="gc-reset"><table cellpadding="0" cellspacing="0" style="width:100%" class="gc-reset"><tbody><tr class="gc-reset"><td class="pls-vert gc-reset"><img class="pls-dropBL gc-reset" style="width:4px !important; height:5px !important; max-width: 4px !important; max-height: 5px !important;" src="./Control PID de Barra y Bola_files/spacer.gif"></td><td class="pls-dropBottom gc-reset"><img class="pls-tailtop gc-reset" style="width:19px !important; height:13px !important; max-width: 19px !important; max-height: 13px !important;" src="./Control PID de Barra y Bola_files/spacer.gif"><img class="pls-spacertop gc-reset" style="width:1px !important; height:1px !important; max-width: 1px !important; max-height: 1px !important;" src="./Control PID de Barra y Bola_files/spacer.gif"></td></tr></tbody></table></td><td class="pls-vert gc-reset"><img class="pls-dropBR gc-reset" style="width:5px !important; height:5px !important; max-width: 5px !important; max-height: 5px !important;" src="./Control PID de Barra y Bola_files/spacer.gif"></td></tr></tbody></table></div></body></html>

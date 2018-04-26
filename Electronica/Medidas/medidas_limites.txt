@@ -1,0 +1,19 @@
+codo derecho abajo 600 arriba 760
+hombro brazo derecho arriba-atras 680 abajo-adelante 820
+hombro cuerpo dentro 840 fuera 720
+
+
+izq
+
+codo izq arriba 620 abajo 490
+hombro cuerpo dentro 970 fuera 770
+hombro brazo adelante 450 atras 660
+
+v
+a
+p
+m
+r
+s
+t
+i

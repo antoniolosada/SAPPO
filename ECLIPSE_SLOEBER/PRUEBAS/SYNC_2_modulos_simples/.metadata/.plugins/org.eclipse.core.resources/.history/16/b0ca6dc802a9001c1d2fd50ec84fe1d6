@@ -1,0 +1,599 @@
+#include "Arduino.h"
+//The setup function is called once at startup of the sketch
+#include <VirtualWire.h>
+#include <util/delay.h>
+#include <eRCaGuy_Timer2_Counter.h>
+
+#define PIN_IDLE  8
+#define PIN_TX  2
+#define PIN_RX  5
+#define PIN_EN_TX 10
+
+#define PIN_COM_TX 4
+#define PIN_ENABLE_TX 5
+
+#define PIN_TRIGGER_RX  7
+#define PIN_ECHO_RX     6
+
+#define PIN_TRIGGER_TX  3
+
+void ConfigurarTimer()
+{
+    // Configuração do TIMER1
+  TCCR1A = 0;                // El registro de control A queda todo en 0
+  TCCR1B = 0;                //limpia registrador
+  TCNT1  = 0;                //Inicializa el temporizador
+  OCR1A = 0xFFFF;            // carga el registrador de comparación: 16MHz/1024/1Hz -1 = 15624 = 0X3D08
+  //TCCR1B |= (1 << WGM12)|(1<<CS10)|(1 << CS12);   // modo CTC, prescaler de 1024: CS12 = 1 e CS10 = 1
+  TCCR1B |= (1 << WGM12)|(1<<CS10);   // modo CTC, prescaler de 1: CS12 = 1 e CS10 = 1
+  //TIMSK1 |= (1 << OCIE1A);  // habilita interrupción por igualdade de comparación
+}
+
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(PIN_RX, INPUT);
+  pinMode(PIN_TX, OUTPUT);
+  //pinMode(PIN_ENABLE_TX, OUTPUT);
+
+  digitalWrite(PIN_TX, HIGH);
+
+  pinMode(PIN_ECHO_RX, INPUT);
+  pinMode(PIN_TRIGGER_RX, OUTPUT);
+  pinMode(PIN_TRIGGER_TX, OUTPUT);
+  pinMode(PIN_EN_TX, OUTPUT);
+
+  pinMode(PIN_COM_TX, OUTPUT);
+
+  digitalWrite(PIN_EN_TX, LOW);
+
+
+//Configuración de radio
+  vw_set_rx_pin(PIN_RX);
+  vw_set_tx_pin(PIN_TX);
+  vw_set_ptt_inverted(true); // Required for DR3100
+  vw_setup(5000);      // Bits per sec
+  vw_rx_start();       // Start the receiver PLL running
+  delay(50);
+
+ActivarTimer2();
+
+
+  Serial.begin(9600);
+  //ConfigurarTimer();
+}
+
+char *cad = "hola";
+char cad1[20] = "hola\0";
+uint8_t buf[200];
+int pin;
+int valor  = HIGH;
+
+int cont = 0;
+int cont_igual = 0;
+int cont_diferente = 0;
+
+int cont_igual0 = 0;
+
+int cont_igual1 = 0;
+
+int espera_us = 1;
+int espera_us_fin = 48;
+
+//x16 en precisión
+//int espera_us = 670;
+//int espera_us_fin = 750;
+
+int iteraciones_us = 200;
+int repeticiones = 100;
+byte sync = 0;
+
+unsigned int medidas[102];
+
+/*************************************************************************************************************************************/
+/*************************************************************************************************************************************/
+/*************************************************************************************************************************************/
+/*************************************************************************************************************************************/
+
+
+
+/*********************************** MEdida de distancia SYNC PIN medida de tiempo*********************************************/
+void ActivarTimer2() {
+  cli();
+  // set timer2 interrupt at 8kHz
+  TCCR2A = 0; // set entire TCCR2A register to 0
+  TCCR2B = 0; // same for TCCR2B
+  TCNT2 = 0;  // initialize counter value to 0
+             // set compare match register for 8khz increments
+  OCR2A = 0b00100111;
+               // turn on CTC mode
+  TCCR2A |= (1 << WGM21);
+  // Set CS21 bit for 8 prescaler
+  TCCR2B |=  3;
+  // enable timer compare interrupt
+  TIMSK2 |= (1 << OCIE2A);
+  sei();
+}
+
+/*
+int cont_sync = 0;
+int salto = 0;
+ISR(TIMER2_COMPA_vect)
+{
+	cli();
+	salto = 0;
+	//Solo comprobamos flancos de subida. valor pasa de 0 a 1
+	if (valor == 0)
+	{
+		if (sync == 0) //CAda 4 bloques de 4 cortos enviamos un pulso largo
+			salto = 1;
+		sync--;
+	}
+
+	if (salto)
+	{
+		sync = 5;
+		OCR2A = 0b01000111;
+		cont_sync++;
+	}
+	else
+	{
+		//En el flanco de subida posterior al cuarto pulso largo
+		if (valor == 0)
+		{
+			//Envio del pulso de ultrasonidos
+			if (cont_sync == 4)
+			{
+				cont_sync = 0;
+			    //Enviar ultrasonidos
+			    digitalWrite(PIN_TRIGGER_TX, LOW);
+			    delayMicroseconds(2);
+			    digitalWrite(PIN_TRIGGER_TX, HIGH);
+			    delayMicroseconds(10);
+			    digitalWrite(PIN_TRIGGER_TX, LOW);
+			}
+		}
+
+		TCNT2 = 0;  // initialize counter value to 0
+		OCR2A = 0b00100111;
+		valor = !valor;
+		digitalWrite(PIN_TX, valor);
+	}
+	sei();
+}
+*/
+
+byte espera = 0;
+ISR(TIMER2_COMPA_vect)
+{
+	cli();
+	TCNT2 = 0;  // initialize counter value to 0
+	if (valor == 1)
+	{
+		sync++;
+		if ((sync < 4) && (espera == 0)) espera = 0;
+	}
+	else if (sync == 7)
+		sync = 0;
+
+	if (espera == 0)
+	{
+		valor = !valor;
+	}
+	else espera = 0;
+
+	digitalWrite(PIN_TX, valor);
+
+	if (cont <= repeticiones)
+      	medidas[cont++] = micros();
+	sei();
+}
+/*
+int sync = 0;
+ISR(TIMER2_COMPA_vect)
+{
+	TCNT2 = 0;  // initialize counter value to 0
+	cli();
+	valor = !valor;
+	digitalWrite(PIN_TX, valor);
+
+	if (cont <= repeticiones)
+      	medidas[cont++] = micros();
+	sei();
+}
+*/
+
+
+void loop()
+{
+  long cont1 = 0;
+  pin = 0;
+  repeticiones = 100;
+  cont=0;
+  //cad1 = "sssssss";
+
+    while(true)
+    {
+      //cont++ en la interrupción del timer2
+      while(cont < repeticiones) Serial.print("");
+
+/*
+      cont1 = 0;
+      while(cont1++ < repeticiones)
+      {
+        Serial.print((medidas[cont1]-medidas[cont1-1])/2);
+        Serial.print(",");
+        if (!(cont1%60)) Serial.println("");
+
+      }
+      */
+      cont = 0;
+    }
+}
+/*********************************** MEdida de distancia SYNC PIN medida de tiempo*********************************************/
+
+
+/*********************************** MEdida de distancia SYNC PIN con delayMicros()*********************************************/
+void loop9()
+{
+  static unsigned long t_start = timer2.get_count(); //units of 0.5us; the count accumulated by Timer2_Counter
+  pin = 0;
+  repeticiones = 100;
+  cont=0;
+  //cad1 = "sssssss";
+
+  medidas[0] = micros();
+  //medidas[0] = timer2.get_count();
+
+ //Sincronización por cambio de pin
+  while(cont < repeticiones)
+  {
+    delayMicroseconds(100);
+    valor = !valor;
+    digitalWrite(PIN_TX, valor);
+
+     medidas[cont++] = micros();
+     //medidas[cont++] = timer2.get_count();
+  }
+
+  cont = 0;
+  while(cont++ < repeticiones)
+  {
+    Serial.print((medidas[cont]-medidas[cont-1])/2);
+    Serial.print(",");
+    if (!(cont%60)) Serial.println("");
+  }
+  delay(5000);
+}
+/*********************************** MEdida de distancia SYNC PIN con delayMicros()*********************************************/
+
+
+//*****************   Varios SYNC ************************/
+void loop8()
+{
+  int pin = 0;
+  int cont = 100;
+  int valor = 0;
+  long ctimer2 = 0;
+  unsigned long cmicros;
+
+
+  /* Retardo con micros() */
+   cmicros = micros();
+    while(true)
+    {
+      long m, m1;
+      delayMicroseconds(100);
+      //_delay_us(100);
+
+      if (micros()-cmicros > 30000)
+      {
+        valor = !valor;
+        digitalWrite(PIN_TX, valor);
+        cmicros = micros();
+      }
+    }
+
+  /* Retardo con delayMicros, sync PIN
+   while(true)
+  {
+    long m, m1;
+    delayMicroseconds(100);
+    //_delay_us(100);
+    valor = !valor;
+    digitalWrite(PIN_TX, valor);
+  }
+  */
+
+  //Medidas de distancia sync paquete
+  while(true)
+  {
+    long m, m1;
+    delayMicroseconds(1000);
+    vw_send((uint8_t *)"rola", 3);
+
+    //Enviar ultrasonidos
+    digitalWrite(PIN_TRIGGER_TX, LOW);
+    delayMicroseconds(2);
+    digitalWrite(PIN_TRIGGER_TX, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(PIN_TRIGGER_TX, LOW);
+
+  }
+
+  // Sin de delay con contador de tiempo
+   cmicros = micros();
+   while(true)
+  {
+    long m, m1;
+    if (micros()-cmicros > 30000)
+    {
+      vw_send((uint8_t *)"rola", 3);
+      cmicros = micros();
+    }
+  }
+
+
+  //Retardo con delayMicros, sync PIN
+   while(true)
+  {
+    long m, m1;
+    delayMicroseconds(100);
+    //_delay_us(100);
+    /*
+    TCNT1 = 0;
+    while (TCNT1 < 16*100); //2 uS
+    */
+    valor = !valor;
+    digitalWrite(PIN_TX, valor);
+  }
+
+ //Retardo con timer2 de alta precisión
+  timer2.setup();
+  while(true)
+  {
+    long m, m1;
+    while(true)
+    {
+      if (ctimer2 == 0)
+      {
+          ctimer2 = timer2.get_count();
+          valor = !valor;
+          digitalWrite(PIN_TX, valor);
+      }
+      else
+          if (timer2.get_count() - ctimer2 > 200)
+            ctimer2 = 0;
+    }
+  }
+
+return;
+
+  while(true)
+  {
+    delayMicroseconds(10);
+
+    if (cont-- == 0)
+    {
+      cont = 50;
+      valor = !valor;
+      digitalWrite(PIN_TX, valor);
+      Serial.println(valor);
+    }
+    pin = digitalRead(PIN_RX);
+    Serial.print(pin);
+  }
+
+}
+
+
+/*
+    Control de ultrasonidos y radio con emisor y receptor conectados a distintos arduinos ****************************************************************
+    Prueba ultrasonidos enlace sync con cable
+    Esperas con registro de contador interno
+*/
+
+void loop3()
+{
+
+  while(true)
+  {
+
+    delay(100);
+    digitalWrite(PIN_COM_TX, HIGH);
+
+    digitalWrite(PIN_TRIGGER_TX, LOW);
+    TCNT1 = 0;
+    while (TCNT1 < 16*2); //2 uS
+    digitalWrite(PIN_TRIGGER_TX, HIGH);
+    TCNT1 = 0;
+    while (TCNT1 < 16*10);
+    digitalWrite(PIN_TRIGGER_TX, LOW);
+
+    digitalWrite(PIN_COM_TX, LOW);
+  }
+}
+/*
+    Control de ultrasonidos y radio con emisor y receptor conectados a distintos arduinos ****************************************************************
+    Prueba ultrasonidos enlace sync por radio
+    Esperas con delayMicroseconds
+*/
+void loop4()
+{
+  digitalWrite(PIN_ENABLE_TX, HIGH);
+
+  while(true)
+  {
+
+    digitalWrite(PIN_TX, HIGH);
+    delayMicroseconds(500);
+    digitalWrite(PIN_TX, HIGH);
+    delayMicroseconds(500);
+
+    digitalWrite(PIN_TX, HIGH);
+
+    //vw_send((uint8_t *)cad, 4);
+
+    digitalWrite(PIN_TRIGGER_TX, LOW);
+    delayMicroseconds(2);
+    digitalWrite(PIN_TRIGGER_TX, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(PIN_TRIGGER_TX, LOW);
+
+    digitalWrite(PIN_COM_TX, LOW);
+  }
+}
+/*
+    Control de ultrasonidos y radio con emisor y receptor conectados a distintos arduinos ****************************************************************
+    Prueba ultrasonidos enlace sync con cable
+    Esperas con delayMicroseconds
+*/
+void loop2()
+{
+  while(true)
+  {
+
+    delay(100);
+
+    digitalWrite(PIN_COM_TX, HIGH);
+
+    digitalWrite(PIN_TRIGGER_TX, LOW);
+    delayMicroseconds(2);
+    digitalWrite(PIN_TRIGGER_TX, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(PIN_TRIGGER_TX, LOW);
+
+    digitalWrite(PIN_COM_TX, LOW);
+  }
+
+
+  return;
+  while(true)
+  {
+    digitalWrite(PIN_COM_TX, HIGH);
+    delay(1000);
+    digitalWrite(PIN_COM_TX, LOW);
+    delay(1000);
+  }
+}
+
+
+/*
+    Control de ultrasonidos y radio con emisor y receptor conectados al mismo arduino
+*/
+void loop1() {
+
+int repeticiones = 100;
+int cont = 0;
+long tiempo = 0;
+
+long medidas[101];
+
+while (cont++ < repeticiones)
+{
+  delay(100);
+  digitalWrite(PIN_TRIGGER_RX, LOW);
+  digitalWrite(PIN_TRIGGER_TX, LOW);
+  delayMicroseconds(2);
+  digitalWrite(PIN_TRIGGER_TX, HIGH);
+  digitalWrite(PIN_TRIGGER_RX, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(PIN_TRIGGER_TX, LOW);
+  digitalWrite(PIN_TRIGGER_RX, LOW);
+  delayMicroseconds(10);
+
+   tiempo = pulseIn(PIN_ECHO_RX, HIGH);
+
+   //Serial.println(tiempo);
+   medidas[cont] = tiempo;
+
+}
+
+for (int i = 1; i<repeticiones; i++)
+{
+  Serial.println(medidas[i]);
+}
+
+return;
+while (espera_us < espera_us_fin)
+{
+    espera_us++;
+    while (true)
+    {
+        cont++;
+        delay(10);
+
+        if (cont == iteraciones_us)
+        {
+          Serial.print(espera_us);
+          Serial.print(",");
+          Serial.print(cont_igual);
+          Serial.print(",");
+          Serial.print(cont_diferente);
+          Serial.print(",");
+          Serial.print(cont_igual0);
+          Serial.print(",");
+          Serial.println(cont_igual1);
+
+          cont = 0;
+          cont_igual = 0;
+          cont_diferente = 0;
+          cont_igual0 = 0;
+          cont_igual1 = 0;
+          valor = HIGH;
+          break;
+        }
+        else
+        {
+          digitalWrite(9, valor);
+          //long rmicros = micros();
+          TCNT1 = 0;
+          //while (TCNT1 < espera_us<<4);
+          //while (TCNT1 < espera_us); //Aumentando la precisión, el rango se mantiene igual
+
+          //delayMicroseconds(espera_us);
+          //delay(80); // la portadora tiene una duración de tx máxima de 80 ms
+          pin = digitalRead(8);
+          //Serial.println(micros()-rmicros); //Los delaymicros son precisos, pero micros() tiene un error de 4 us
+
+          if (valor == pin)
+          {
+            cont_igual++;
+            //Serial.print(pin);
+          }
+          else
+          {
+            cont_diferente++;
+            //Serial.print("_");
+          }
+
+          if (valor == HIGH)
+          {
+            if (valor == pin) cont_igual1++;
+          }
+          else
+          {
+            if (valor == pin) cont_igual0++;
+          }
+
+          valor = !valor;
+
+          // if (cont % 200 == 0)
+          // {
+          //   Serial.println("");
+          // }
+        }
+    }
+
+}
+
+
+
+  /*vw_send((uint8_t *)cad, 4);
+  delay(1000);
+
+    if (vw_get_message(buf, (uint8_t *)cad1)) // Non-blocking
+    {
+      Serial.println(cad1);
+    }*/
+
+}

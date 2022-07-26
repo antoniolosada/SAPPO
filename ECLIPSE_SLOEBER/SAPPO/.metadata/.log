@@ -1,0 +1,47 @@
+!SESSION 2022-07-23 09:48:51.415 -----------------------------------------------
+eclipse.buildId=unknown
+java.fullversion=11.0.10+9
+JRE 11 Windows 8 amd64-64-Bit Compressed References 20210120_899 (JIT enabled, AOT enabled)
+OpenJ9   - 345e1b09e
+OMR      - 741e94ea8
+JCL      - 0a86953833 based on jdk-11.0.10+9
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_ES
+Framework arguments:  -perspective io.sloeber.application.perspective
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -perspective io.sloeber.application.perspective
+
+This is a continuation of log file D:\GDRIVE\TONI\PROY\SAPPO\ECLIPSE_SLOEBER\SAPPO\.metadata\.bak_0.log
+Created Time: 2022-07-23 09:49:53.437
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-07-23 09:49:53.438
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\antonio'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY io.sloeber.core 8 0 2022-07-23 09:50:01.539
+!MESSAGE Index of project changed :RODI_servos
+
+!ENTRY io.sloeber.core 8 0 2022-07-23 09:50:09.347
+!MESSAGE Index of project changed :Baliza1
+
+!ENTRY io.sloeber.core 8 0 2022-07-23 09:50:10.452
+!MESSAGE Index of project changed :Baliza2
+
+!ENTRY io.sloeber.core 8 0 2022-07-23 09:50:14.067
+!MESSAGE Looking for libraries for project :RODI_servos
+
+!ENTRY io.sloeber.core 8 0 2022-07-23 09:50:14.269
+!MESSAGE libraries added for project RODI_servos
+
+!ENTRY io.sloeber.core 8 0 2022-07-23 09:50:14.270
+!MESSAGE Looking for libraries for project :Baliza1
+
+!ENTRY io.sloeber.core 8 0 2022-07-23 09:50:14.300
+!MESSAGE libraries added for project Baliza1
+
+!ENTRY io.sloeber.core 8 0 2022-07-23 09:50:14.301
+!MESSAGE Looking for libraries for project :Baliza2
+
+!ENTRY io.sloeber.core 8 0 2022-07-23 09:50:14.314
+!MESSAGE libraries added for project Baliza2

@@ -1,0 +1,1 @@
+La señal cuadrada de sincronización puede emplearse para reiniciar el timer2 en los flancos de subida

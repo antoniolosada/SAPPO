@@ -1,0 +1,21 @@
+﻿  VREP_call.cpp
+D:\GDRIVE\TONI\PROY\SAPPO\Simulacion\v-rep\v-rep1_code_vs\v-rep1\VREP_call.cpp(40,1): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+D:\GDRIVE\TONI\PROY\SAPPO\Simulacion\v-rep\v-rep1_code_vs\v-rep1\VREP_call.cpp(45,40): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+D:\GDRIVE\TONI\PROY\SAPPO\Simulacion\v-rep\v-rep1_code_vs\v-rep1\VREP_call.cpp(97,33): error C2065: 'simx_opmode_oneshot': identificador no declarado
+D:\GDRIVE\TONI\PROY\SAPPO\Simulacion\v-rep\v-rep1_code_vs\v-rep1\VREP_call.cpp(101,32): error C2065: 'simx_opmode_oneshot_wait': identificador no declarado
+D:\GDRIVE\TONI\PROY\SAPPO\Simulacion\v-rep\v-rep1_code_vs\v-rep1\VREP_call.cpp(109,13): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
+D:\GDRIVE\TONI\PROY\SAPPO\Simulacion\v-rep\v-rep1_code_vs\v-rep1\VREP_call.cpp(117,15): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+D:\GDRIVE\TONI\PROY\SAPPO\Simulacion\v-rep\v-rep1_code_vs\v-rep1\VREP_call.cpp(140,58): error C2065: 'simx_opmode_oneshot': identificador no declarado
+D:\GDRIVE\TONI\PROY\SAPPO\Simulacion\v-rep\v-rep1_code_vs\v-rep1\VREP_call.cpp(141,60): error C2065: 'simx_opmode_oneshot': identificador no declarado
+D:\GDRIVE\TONI\PROY\SAPPO\Simulacion\v-rep\v-rep1_code_vs\v-rep1\VREP_call.cpp(165,78): error C2065: 'simx_opmode_blocking': identificador no declarado
+D:\GDRIVE\TONI\PROY\SAPPO\Simulacion\v-rep\v-rep1_code_vs\v-rep1\VREP_call.cpp(166,83): error C2065: 'simx_opmode_blocking': identificador no declarado
+D:\GDRIVE\TONI\PROY\SAPPO\Simulacion\v-rep\v-rep1_code_vs\v-rep1\VREP_call.cpp(167,71): error C2065: 'simx_opmode_blocking': identificador no declarado
+D:\GDRIVE\TONI\PROY\SAPPO\Simulacion\v-rep\v-rep1_code_vs\v-rep1\VREP_call.cpp(168,68): error C2065: 'simx_opmode_blocking': identificador no declarado
+D:\GDRIVE\TONI\PROY\SAPPO\Simulacion\v-rep\v-rep1_code_vs\v-rep1\VREP_call.cpp(179,74): error C2065: 'simx_opmode_streaming': identificador no declarado
+D:\GDRIVE\TONI\PROY\SAPPO\Simulacion\v-rep\v-rep1_code_vs\v-rep1\VREP_call.cpp(189,57): error C2065: 'simx_opmode_oneshot': identificador no declarado
+D:\GDRIVE\TONI\PROY\SAPPO\Simulacion\v-rep\v-rep1_code_vs\v-rep1\VREP_call.cpp(190,58): error C2065: 'simx_opmode_oneshot': identificador no declarado
+D:\GDRIVE\TONI\PROY\SAPPO\Simulacion\v-rep\v-rep1_code_vs\v-rep1\VREP_call.cpp(233,75): error C2065: 'simx_opmode_oneshot': identificador no declarado
+D:\GDRIVE\TONI\PROY\SAPPO\Simulacion\v-rep\v-rep1_code_vs\v-rep1\VREP_call.cpp(322,31): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+D:\GDRIVE\TONI\PROY\SAPPO\Simulacion\v-rep\v-rep1_code_vs\v-rep1\VREP_call.cpp(324,23): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\GDRIVE\TONI\PROY\SAPPO\Simulacion\v-rep\v-rep1_code_vs\v-rep1\VREP_call.cpp(325,23): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+D:\GDRIVE\TONI\PROY\SAPPO\Simulacion\v-rep\v-rep1_code_vs\v-rep1\VREP_call.cpp(336,36): warning C4305: '=': truncamiento de 'double' a 'float'

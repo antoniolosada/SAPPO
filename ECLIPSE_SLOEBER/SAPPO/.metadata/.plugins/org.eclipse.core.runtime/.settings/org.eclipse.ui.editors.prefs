@@ -1,0 +1,8 @@
+eclipse.preferences.version=1
+isBookmarkGoToNextNavigationTarget=true
+isErrorGoToNextNavigationTarget=false
+isIndexResultGoToNextNavigationTarget=false
+isInfoGoToNextNavigationTarget=false
+isWarningGoToNextNavigationTarget=false
+org.eclipse.cdt.codan.ui.annotation.error.GoToNextNavigationTarget=false
+org.eclipse.cdt.codan.ui.annotation.warning.GoToNextNavigationTarget=false

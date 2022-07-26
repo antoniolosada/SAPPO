@@ -1,0 +1,42 @@
+09:34:18 **** Build of configuration Release for project Baliza2 ****
+"D:\\PROGRAMAS\\Sloeber\\arduinoPlugin\\tools\\make\\make" all 
+'Building file: ..\sloeber.ino.cpp'
+'Starting C++ compile'
+"D:\PROGRAMAS\Sloeber\arduinoPlugin\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -Wno-error=narrowing -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10812 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR     -I"D:\PROGRAMAS\Sloeber\arduinoPlugin\packages\arduino\hardware\avr\1.8.5\cores\arduino" -I"D:\PROGRAMAS\Sloeber\arduinoPlugin\packages\arduino\hardware\avr\1.8.5\variants\standard" -I"D:\PROGRAMAS\Sloeber\arduinoPlugin\libraries\RF24\1.4.2" -I"D:\PROGRAMAS\Sloeber\arduinoPlugin\packages\arduino\hardware\avr\1.8.5\libraries\SPI\src" -I"D:\PROGRAMAS\Sloeber\arduinoPlugin\packages\arduino\hardware\avr\1.8.5\libraries\VirtualWire" -I"D:\PROGRAMAS\Sloeber\arduinoPlugin\libraries\RF24\1.4.2\utility" -I"C:\Users\antonio\Documents\Arduino\libraries\Low-Power-master" -MMD -MP -MF"sloeber.ino.cpp.d" -MT"sloeber.ino.cpp.o" -D__IN_ECLIPSE__=1 -x c++ "..\sloeber.ino.cpp"   -o "sloeber.ino.cpp.o"
+'Finished building: ..\sloeber.ino.cpp'
+' '
+'Starting combiner'
+"D:\PROGRAMAS\Sloeber\arduinoPlugin\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7/bin/avr-gcc" -w -Os -g -flto -fuse-linker-plugin -Wl,--gc-sections -mmcu=atmega328p   -o "D:\GDRIVE\TONI\PROY\SAPPO\ECLIPSE_SLOEBER\SAPPO\Baliza2\Release/Baliza2.elf"    .\sloeber.ino.cpp.o  .\libraries\VirtualWire\VirtualWire.cpp.o  .\libraries\SPI\src\SPI.cpp.o  .\libraries\RF24\RF24.cpp.o  .\libraries\Low-Power-master\LowPower.cpp.o     D:\GDRIVE\TONI\PROY\SAPPO\ECLIPSE_SLOEBER\SAPPO\Baliza2\Release/arduino.ar  "-LD:\GDRIVE\TONI\PROY\SAPPO\ECLIPSE_SLOEBER\SAPPO\Baliza2\Release" -lm
+'Finished building: Baliza2.elf'
+' '
+'Do all objcopy commands'
+"D:\PROGRAMAS\Sloeber\arduinoPlugin\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7/bin/avr-objcopy" -O ihex -j .eeprom --set-section-flags=.eeprom=alloc,load --no-change-warnings --change-section-lma .eeprom=0  "D:\GDRIVE\TONI\PROY\SAPPO\ECLIPSE_SLOEBER\SAPPO\Baliza2\Release/Baliza2.elf" "D:\GDRIVE\TONI\PROY\SAPPO\ECLIPSE_SLOEBER\SAPPO\Baliza2\Release/Baliza2.eep"
+"D:\PROGRAMAS\Sloeber\arduinoPlugin\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7/bin/avr-objcopy" -O ihex -R .eeprom  "D:\GDRIVE\TONI\PROY\SAPPO\ECLIPSE_SLOEBER\SAPPO\Baliza2\Release/Baliza2.elf" "D:\GDRIVE\TONI\PROY\SAPPO\ECLIPSE_SLOEBER\SAPPO\Baliza2\Release/Baliza2.hex"
+'Finished building: Baliza2.hex'
+' '
+'Building target: Baliza2'
+'Printing size:'
+"D:\PROGRAMAS\Sloeber\arduinoPlugin\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7/bin/avr-size" -A "D:\GDRIVE\TONI\PROY\SAPPO\ECLIPSE_SLOEBER\SAPPO\Baliza2\Release/Baliza2.elf"
+D:\GDRIVE\TONI\PROY\SAPPO\ECLIPSE_SLOEBER\SAPPO\Baliza2\Release/Baliza2.elf  :
+section                     size      addr
+.data                         64   8388864
+.text                       5110         0
+.bss                         352   8388928
+.comment                      17         0
+.note.gnu.avr.deviceinfo      64         0
+.debug_aranges               232         0
+.debug_info                19378         0
+.debug_abbrev               3588         0
+.debug_line                 5562         0
+.debug_frame                1160         0
+.debug_str                  4172         0
+.debug_loc                  8926         0
+.debug_ranges                768         0
+Total                      49393
+
+
+'Finished building target: Baliza2'
+' '
+
+09:34:20 Build Finished. 0 errors, 0 warnings. (took 1s.493ms)
+

@@ -1,0 +1,10 @@
+En el guiado intervienen 4 vectores
+1. Vector de dirección del robot absoluto
+2. Vector de tendencia de dirección
+3. Vector de aproximación
+4. Vector de alejamiento
+5. Vector de proximidad a la trayectoria
+
+El sistema de guiado calcula la diferencia entre el vector de dirección y el vector de aproximación. Corrige la trayectoria para conseguir que el robot se encuentre siempre apuntando en la dirección del vector de aproximación.
+El vector de dirección se obtiene siempre que el sistema de posicionamiento devuelva dos posiciones de la trayectoria cuya diferencia en distancia sea mayor que el error medio estimadio del sistema de posicionamiento. Este vector puede contener un error importante, pero es el valor mínimo que puede emplearse para corregir la trayectoria del robot.
+El vector de distancia se emplea para eliminar valores erróneos del vector de dirección del robot. Si el vector de distancia indica que el robot se encuentra a la derecha de la trayectoria, aunque el vector de direccción junto con el vector de aproximación indiquen que hay que girar a la derecha, el sistema prohibirá este giro para que el robot no se aleje más de la trayectoria.

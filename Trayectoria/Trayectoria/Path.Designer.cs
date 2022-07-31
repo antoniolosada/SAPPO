@@ -47,7 +47,6 @@
             this.cmdLeerCfg = new System.Windows.Forms.Button();
             this.chkPintarColision = new System.Windows.Forms.CheckBox();
             this.cbPuerto = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.cmdInicarRobot = new System.Windows.Forms.Button();
             this.tmrControlPosicion = new System.Windows.Forms.Timer(this.components);
             this.lblPosOk = new System.Windows.Forms.Label();
@@ -112,6 +111,13 @@
             this.cmdRadar = new System.Windows.Forms.Button();
             this.cbRobot = new System.Windows.Forms.ComboBox();
             this.pbArribaDespacio = new System.Windows.Forms.PictureBox();
+            this.cmdPos0 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.lblPos = new System.Windows.Forms.TextBox();
+            this.pbIzq = new System.Windows.Forms.ProgressBar();
+            this.pbDer = new System.Windows.Forms.ProgressBar();
+            this.tbIzq = new System.Windows.Forms.TextBox();
+            this.tbDer = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.picMapa)).BeginInit();
             this.grpPanel.SuspendLayout();
             this.panelLOG.SuspendLayout();
@@ -150,7 +156,7 @@
             // 
             // UnirNodos
             // 
-            this.UnirNodos.Location = new System.Drawing.Point(136, 681);
+            this.UnirNodos.Location = new System.Drawing.Point(232, 682);
             this.UnirNodos.Name = "UnirNodos";
             this.UnirNodos.Size = new System.Drawing.Size(118, 32);
             this.UnirNodos.TabIndex = 3;
@@ -160,7 +166,7 @@
             // 
             // AddNodos
             // 
-            this.AddNodos.Location = new System.Drawing.Point(12, 681);
+            this.AddNodos.Location = new System.Drawing.Point(111, 682);
             this.AddNodos.Name = "AddNodos";
             this.AddNodos.Size = new System.Drawing.Size(118, 32);
             this.AddNodos.TabIndex = 4;
@@ -176,12 +182,12 @@
             this.lstEnlaces.ItemHeight = 20;
             this.lstEnlaces.Location = new System.Drawing.Point(1115, 81);
             this.lstEnlaces.Name = "lstEnlaces";
-            this.lstEnlaces.Size = new System.Drawing.Size(163, 244);
+            this.lstEnlaces.Size = new System.Drawing.Size(163, 324);
             this.lstEnlaces.TabIndex = 5;
             // 
             // cmdRuta
             // 
-            this.cmdRuta.Location = new System.Drawing.Point(260, 681);
+            this.cmdRuta.Location = new System.Drawing.Point(352, 683);
             this.cmdRuta.Name = "cmdRuta";
             this.cmdRuta.Size = new System.Drawing.Size(118, 32);
             this.cmdRuta.TabIndex = 6;
@@ -191,7 +197,7 @@
             // 
             // cmdCalcularRuta
             // 
-            this.cmdCalcularRuta.Location = new System.Drawing.Point(12, 739);
+            this.cmdCalcularRuta.Location = new System.Drawing.Point(111, 740);
             this.cmdCalcularRuta.Name = "cmdCalcularRuta";
             this.cmdCalcularRuta.Size = new System.Drawing.Size(118, 32);
             this.cmdCalcularRuta.TabIndex = 7;
@@ -201,9 +207,9 @@
             // 
             // cmdBuscarRuta
             // 
-            this.cmdBuscarRuta.Location = new System.Drawing.Point(399, 712);
+            this.cmdBuscarRuta.Location = new System.Drawing.Point(471, 714);
             this.cmdBuscarRuta.Name = "cmdBuscarRuta";
-            this.cmdBuscarRuta.Size = new System.Drawing.Size(118, 32);
+            this.cmdBuscarRuta.Size = new System.Drawing.Size(106, 30);
             this.cmdBuscarRuta.TabIndex = 8;
             this.cmdBuscarRuta.Text = "Buscar Ruta";
             this.cmdBuscarRuta.UseVisualStyleBackColor = true;
@@ -211,7 +217,7 @@
             // 
             // cmdMedirDistancia
             // 
-            this.cmdMedirDistancia.Location = new System.Drawing.Point(12, 712);
+            this.cmdMedirDistancia.Location = new System.Drawing.Point(111, 713);
             this.cmdMedirDistancia.Name = "cmdMedirDistancia";
             this.cmdMedirDistancia.Size = new System.Drawing.Size(118, 32);
             this.cmdMedirDistancia.TabIndex = 9;
@@ -241,7 +247,7 @@
             // 
             // cmdDefinirObstaculo
             // 
-            this.cmdDefinirObstaculo.Location = new System.Drawing.Point(136, 712);
+            this.cmdDefinirObstaculo.Location = new System.Drawing.Point(232, 713);
             this.cmdDefinirObstaculo.Name = "cmdDefinirObstaculo";
             this.cmdDefinirObstaculo.Size = new System.Drawing.Size(118, 32);
             this.cmdDefinirObstaculo.TabIndex = 12;
@@ -273,9 +279,9 @@
             // 
             // cmdLeerCfg
             // 
-            this.cmdLeerCfg.Location = new System.Drawing.Point(1025, 712);
+            this.cmdLeerCfg.Location = new System.Drawing.Point(471, 683);
             this.cmdLeerCfg.Name = "cmdLeerCfg";
-            this.cmdLeerCfg.Size = new System.Drawing.Size(84, 32);
+            this.cmdLeerCfg.Size = new System.Drawing.Size(106, 32);
             this.cmdLeerCfg.TabIndex = 15;
             this.cmdLeerCfg.Text = "Leer Cfg";
             this.cmdLeerCfg.UseVisualStyleBackColor = true;
@@ -366,27 +372,17 @@
             "COM68",
             "COM69",
             "COM70"});
-            this.cbPuerto.Location = new System.Drawing.Point(583, 680);
+            this.cbPuerto.Location = new System.Drawing.Point(596, 680);
             this.cbPuerto.Name = "cbPuerto";
-            this.cbPuerto.Size = new System.Drawing.Size(91, 26);
+            this.cbPuerto.Size = new System.Drawing.Size(78, 26);
             this.cbPuerto.TabIndex = 17;
             this.cbPuerto.Text = "COM10";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(523, 683);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 18);
-            this.label2.TabIndex = 18;
-            this.label2.Text = "Puerto";
-            // 
             // cmdInicarRobot
             // 
-            this.cmdInicarRobot.Location = new System.Drawing.Point(399, 681);
+            this.cmdInicarRobot.Location = new System.Drawing.Point(583, 714);
             this.cmdInicarRobot.Name = "cmdInicarRobot";
-            this.cmdInicarRobot.Size = new System.Drawing.Size(78, 32);
+            this.cmdInicarRobot.Size = new System.Drawing.Size(69, 29);
             this.cmdInicarRobot.TabIndex = 19;
             this.cmdInicarRobot.Tag = "OFF";
             this.cmdInicarRobot.Text = "Conectar";
@@ -470,7 +466,7 @@
             // 
             // cmdPanel
             // 
-            this.cmdPanel.Location = new System.Drawing.Point(776, 740);
+            this.cmdPanel.Location = new System.Drawing.Point(782, 740);
             this.cmdPanel.Name = "cmdPanel";
             this.cmdPanel.Size = new System.Drawing.Size(85, 31);
             this.cmdPanel.TabIndex = 25;
@@ -481,7 +477,7 @@
             // 
             // cmdColocarBaliza
             // 
-            this.cmdColocarBaliza.Location = new System.Drawing.Point(260, 712);
+            this.cmdColocarBaliza.Location = new System.Drawing.Point(352, 714);
             this.cmdColocarBaliza.Name = "cmdColocarBaliza";
             this.cmdColocarBaliza.Size = new System.Drawing.Size(118, 32);
             this.cmdColocarBaliza.TabIndex = 26;
@@ -597,9 +593,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(692, 740);
+            this.button1.Location = new System.Drawing.Point(704, 741);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(78, 32);
+            this.button1.Size = new System.Drawing.Size(78, 30);
             this.button1.TabIndex = 37;
             this.button1.Text = "P.Kalman";
             this.button1.UseVisualStyleBackColor = true;
@@ -607,9 +603,9 @@
             // 
             // cmdSeguirRuta
             // 
-            this.cmdSeguirRuta.Location = new System.Drawing.Point(399, 739);
+            this.cmdSeguirRuta.Location = new System.Drawing.Point(471, 741);
             this.cmdSeguirRuta.Name = "cmdSeguirRuta";
-            this.cmdSeguirRuta.Size = new System.Drawing.Size(118, 32);
+            this.cmdSeguirRuta.Size = new System.Drawing.Size(106, 32);
             this.cmdSeguirRuta.TabIndex = 38;
             this.cmdSeguirRuta.Tag = "OFF";
             this.cmdSeguirRuta.Text = "Seguir Ruta";
@@ -622,15 +618,15 @@
             this.lblms.BackColor = System.Drawing.Color.White;
             this.lblms.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblms.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblms.Location = new System.Drawing.Point(1215, 348);
+            this.lblms.Location = new System.Drawing.Point(1214, 414);
             this.lblms.Name = "lblms";
-            this.lblms.Size = new System.Drawing.Size(63, 23);
+            this.lblms.Size = new System.Drawing.Size(64, 27);
             this.lblms.TabIndex = 39;
             this.lblms.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cmdMapear
             // 
-            this.cmdMapear.Location = new System.Drawing.Point(776, 712);
+            this.cmdMapear.Location = new System.Drawing.Point(782, 712);
             this.cmdMapear.Name = "cmdMapear";
             this.cmdMapear.Size = new System.Drawing.Size(85, 32);
             this.cmdMapear.TabIndex = 40;
@@ -640,7 +636,7 @@
             // 
             // cmdBorrarBalizas
             // 
-            this.cmdBorrarBalizas.Location = new System.Drawing.Point(260, 739);
+            this.cmdBorrarBalizas.Location = new System.Drawing.Point(352, 741);
             this.cmdBorrarBalizas.Name = "cmdBorrarBalizas";
             this.cmdBorrarBalizas.Size = new System.Drawing.Size(118, 32);
             this.cmdBorrarBalizas.TabIndex = 41;
@@ -650,7 +646,7 @@
             // 
             // cmdBorrarNodos
             // 
-            this.cmdBorrarNodos.Location = new System.Drawing.Point(136, 739);
+            this.cmdBorrarNodos.Location = new System.Drawing.Point(232, 740);
             this.cmdBorrarNodos.Name = "cmdBorrarNodos";
             this.cmdBorrarNodos.Size = new System.Drawing.Size(118, 32);
             this.cmdBorrarNodos.TabIndex = 42;
@@ -721,9 +717,9 @@
             // 
             // cmdVerLOG
             // 
-            this.cmdVerLOG.Location = new System.Drawing.Point(1025, 740);
+            this.cmdVerLOG.Location = new System.Drawing.Point(583, 742);
             this.cmdVerLOG.Name = "cmdVerLOG";
-            this.cmdVerLOG.Size = new System.Drawing.Size(84, 31);
+            this.cmdVerLOG.Size = new System.Drawing.Size(119, 31);
             this.cmdVerLOG.TabIndex = 45;
             this.cmdVerLOG.Text = "Ver LOG";
             this.cmdVerLOG.UseVisualStyleBackColor = true;
@@ -731,9 +727,9 @@
             // 
             // cmdTest
             // 
-            this.cmdTest.Location = new System.Drawing.Point(583, 740);
+            this.cmdTest.Location = new System.Drawing.Point(1025, 713);
             this.cmdTest.Name = "cmdTest";
-            this.cmdTest.Size = new System.Drawing.Size(78, 32);
+            this.cmdTest.Size = new System.Drawing.Size(84, 31);
             this.cmdTest.TabIndex = 46;
             this.cmdTest.Text = "Prueba";
             this.cmdTest.UseVisualStyleBackColor = true;
@@ -876,9 +872,9 @@
             // 
             // cmdPos
             // 
-            this.cmdPos.Location = new System.Drawing.Point(473, 681);
+            this.cmdPos.Location = new System.Drawing.Point(652, 714);
             this.cmdPos.Name = "cmdPos";
-            this.cmdPos.Size = new System.Drawing.Size(44, 32);
+            this.cmdPos.Size = new System.Drawing.Size(50, 29);
             this.cmdPos.TabIndex = 62;
             this.cmdPos.Tag = "OFF";
             this.cmdPos.Text = "Pos";
@@ -887,7 +883,7 @@
             // 
             // cmdReset
             // 
-            this.cmdReset.Location = new System.Drawing.Point(692, 712);
+            this.cmdReset.Location = new System.Drawing.Point(704, 713);
             this.cmdReset.Name = "cmdReset";
             this.cmdReset.Size = new System.Drawing.Size(78, 31);
             this.cmdReset.TabIndex = 63;
@@ -899,7 +895,7 @@
             // pbArriba
             // 
             this.pbArriba.Image = ((System.Drawing.Image)(resources.GetObject("pbArriba.Image")));
-            this.pbArriba.Location = new System.Drawing.Point(1178, 342);
+            this.pbArriba.Location = new System.Drawing.Point(40, 676);
             this.pbArriba.Name = "pbArriba";
             this.pbArriba.Size = new System.Drawing.Size(30, 29);
             this.pbArriba.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -912,9 +908,9 @@
             // pbDerecha
             // 
             this.pbDerecha.Image = ((System.Drawing.Image)(resources.GetObject("pbDerecha.Image")));
-            this.pbDerecha.Location = new System.Drawing.Point(1206, 385);
+            this.pbDerecha.Location = new System.Drawing.Point(68, 719);
             this.pbDerecha.Name = "pbDerecha";
-            this.pbDerecha.Size = new System.Drawing.Size(30, 29);
+            this.pbDerecha.Size = new System.Drawing.Size(30, 24);
             this.pbDerecha.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbDerecha.TabIndex = 65;
             this.pbDerecha.TabStop = false;
@@ -924,10 +920,11 @@
             // 
             // pbAbajo
             // 
+            this.pbAbajo.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.pbAbajo.Image = ((System.Drawing.Image)(resources.GetObject("pbAbajo.Image")));
-            this.pbAbajo.Location = new System.Drawing.Point(1149, 385);
+            this.pbAbajo.Location = new System.Drawing.Point(11, 719);
             this.pbAbajo.Name = "pbAbajo";
-            this.pbAbajo.Size = new System.Drawing.Size(30, 29);
+            this.pbAbajo.Size = new System.Drawing.Size(30, 23);
             this.pbAbajo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbAbajo.TabIndex = 66;
             this.pbAbajo.TabStop = false;
@@ -938,9 +935,9 @@
             // pbIzquierda
             // 
             this.pbIzquierda.Image = ((System.Drawing.Image)(resources.GetObject("pbIzquierda.Image")));
-            this.pbIzquierda.Location = new System.Drawing.Point(1179, 411);
+            this.pbIzquierda.Location = new System.Drawing.Point(41, 741);
             this.pbIzquierda.Name = "pbIzquierda";
-            this.pbIzquierda.Size = new System.Drawing.Size(30, 29);
+            this.pbIzquierda.Size = new System.Drawing.Size(30, 23);
             this.pbIzquierda.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbIzquierda.TabIndex = 67;
             this.pbIzquierda.TabStop = false;
@@ -951,9 +948,9 @@
             // pbParar
             // 
             this.pbParar.Image = ((System.Drawing.Image)(resources.GetObject("pbParar.Image")));
-            this.pbParar.Location = new System.Drawing.Point(1179, 385);
+            this.pbParar.Location = new System.Drawing.Point(41, 719);
             this.pbParar.Name = "pbParar";
-            this.pbParar.Size = new System.Drawing.Size(30, 29);
+            this.pbParar.Size = new System.Drawing.Size(30, 23);
             this.pbParar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbParar.TabIndex = 68;
             this.pbParar.TabStop = false;
@@ -1031,7 +1028,7 @@
             // pbArribaDespacio
             // 
             this.pbArribaDespacio.Image = ((System.Drawing.Image)(resources.GetObject("pbArribaDespacio.Image")));
-            this.pbArribaDespacio.Location = new System.Drawing.Point(1178, 367);
+            this.pbArribaDespacio.Location = new System.Drawing.Point(40, 701);
             this.pbArribaDespacio.Name = "pbArribaDespacio";
             this.pbArribaDespacio.Size = new System.Drawing.Size(30, 19);
             this.pbArribaDespacio.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1041,10 +1038,74 @@
             this.pbArribaDespacio.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbArribaDespacio_MouseDown);
             this.pbArribaDespacio.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pbArribaDespacio_MouseUp);
             // 
+            // cmdPos0
+            // 
+            this.cmdPos0.Location = new System.Drawing.Point(-3, 677);
+            this.cmdPos0.Name = "cmdPos0";
+            this.cmdPos0.Size = new System.Drawing.Size(36, 20);
+            this.cmdPos0.TabIndex = 76;
+            this.cmdPos0.Text = "0,0";
+            this.cmdPos0.UseVisualStyleBackColor = true;
+            this.cmdPos0.Click += new System.EventHandler(this.cmdPos0_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(-3, 694);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(36, 21);
+            this.button3.TabIndex = 77;
+            this.button3.Text = "M";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // lblPos
+            // 
+            this.lblPos.Location = new System.Drawing.Point(78, 686);
+            this.lblPos.Name = "lblPos";
+            this.lblPos.Size = new System.Drawing.Size(20, 20);
+            this.lblPos.TabIndex = 78;
+            // 
+            // pbIzq
+            // 
+            this.pbIzq.Location = new System.Drawing.Point(2, 752);
+            this.pbIzq.Name = "pbIzq";
+            this.pbIzq.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.pbIzq.Size = new System.Drawing.Size(42, 19);
+            this.pbIzq.TabIndex = 79;
+            // 
+            // pbDer
+            // 
+            this.pbDer.Location = new System.Drawing.Point(68, 752);
+            this.pbDer.Name = "pbDer";
+            this.pbDer.Size = new System.Drawing.Size(42, 19);
+            this.pbDer.TabIndex = 80;
+            // 
+            // tbIzq
+            // 
+            this.tbIzq.Location = new System.Drawing.Point(2, 719);
+            this.tbIzq.Name = "tbIzq";
+            this.tbIzq.Size = new System.Drawing.Size(10, 20);
+            this.tbIzq.TabIndex = 81;
+            // 
+            // tbDer
+            // 
+            this.tbDer.Location = new System.Drawing.Point(99, 719);
+            this.tbDer.Name = "tbDer";
+            this.tbDer.Size = new System.Drawing.Size(9, 20);
+            this.tbDer.TabIndex = 82;
+            // 
             // frmTrayectoria
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1284, 781);
+            this.Controls.Add(this.tbDer);
+            this.Controls.Add(this.tbIzq);
+            this.Controls.Add(this.pbIzquierda);
+            this.Controls.Add(this.pbDer);
+            this.Controls.Add(this.pbIzq);
+            this.Controls.Add(this.lblPos);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.cmdPos0);
             this.Controls.Add(this.pbArribaDespacio);
             this.Controls.Add(this.cbRobot);
             this.Controls.Add(this.cmdRadar);
@@ -1053,7 +1114,6 @@
             this.Controls.Add(this.lblSensorBal2);
             this.Controls.Add(this.chkKalman);
             this.Controls.Add(this.pbParar);
-            this.Controls.Add(this.pbIzquierda);
             this.Controls.Add(this.pbAbajo);
             this.Controls.Add(this.pbDerecha);
             this.Controls.Add(this.pbArriba);
@@ -1100,7 +1160,6 @@
             this.Controls.Add(this.lblPosBal2);
             this.Controls.Add(this.lblPosOk);
             this.Controls.Add(this.cmdInicarRobot);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.cbPuerto);
             this.Controls.Add(this.chkPintarColision);
             this.Controls.Add(this.cmdLeerCfg);
@@ -1160,7 +1219,6 @@
         private System.Windows.Forms.Button cmdLeerCfg;
         private System.Windows.Forms.CheckBox chkPintarColision;
         private System.Windows.Forms.ComboBox cbPuerto;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button cmdInicarRobot;
         private System.Windows.Forms.Timer tmrControlPosicion;
         private System.Windows.Forms.Label lblPosOk;
@@ -1225,6 +1283,13 @@
         private System.Windows.Forms.Button cmdRadar;
         private System.Windows.Forms.ComboBox cbRobot;
         private System.Windows.Forms.PictureBox pbArribaDespacio;
+        private System.Windows.Forms.Button cmdPos0;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.TextBox lblPos;
+        private System.Windows.Forms.ProgressBar pbIzq;
+        private System.Windows.Forms.ProgressBar pbDer;
+        private System.Windows.Forms.TextBox tbIzq;
+        private System.Windows.Forms.TextBox tbDer;
     }
 }
 

@@ -81,7 +81,8 @@ namespace Trayectoria
         public const double VELOCIDAD_ANGULAR_ARRANQUE_SIM = 0.5;
         public const double PARAR_MOTOR = 999;
         public const double VELOCIDAD_ANGULAR_MIN = 0.0001;
-        public double DISTANCIA_SALTO_NODO = 25; 
+        public double DISTANCIA_SALTO_NODO = 25;
+        public double DISTANCIA_NODO_PARA_VEL_MIN = 30;
         public double MODULO_MIN_MEDIDA = 6;
         public double MODULO_MIN_MEDIDA_AVANCE = 6;
         public double MIN_MODULO_ACT_POSICION = 12;
@@ -91,15 +92,16 @@ namespace Trayectoria
 
         public const int MAX_VALOR_OUT_PID = 255;
         public const int FACTOR_SALIDA = 1;
-        public double MAX_VEL_ANG = 3;	//Máxima diferencia de velocidad con corrección de trayectoria
-        public const double MAX_VEL_ANG_RODI = 15;
-        public const double MAX_VEL_ANG_DANI = 30;
+        public double MAX_VEL_ANG = 0;	//Máxima diferencia de velocidad con corrección de trayectoria
+
         public const int VEL_MIN_RODI = 90;
         public const double MAX_VEL_FIJA_SIM = 0.6;	//Velocidad lineal sin corrección de trayectoria
         public const double MIN_VEL_FIJA_SIM = 0.2; //Velocidad lineal con corrección de trayectoria
 
-        public const double MIN_VEL_FIJA_SIM_RODI = 0; //Velocidad lineal con corrección de trayectoria
-        public const double MAX_VEL_FIJA_SIM_RODI = 5; //Velocidad lineal con corrección de trayectoria
+        public const double MIN_VEL_RODI_IZQ = 0; //Velocidad lineal con corrección de trayectoria
+        public const double MIN_VEL_RODI_DER = 4; //Velocidad lineal con corrección de trayectoria
+        public const double MAX_VEL_RODI_DER = 9; //Velocidad lineal con corrección de trayectoria
+        public const double MAX_VEL_RODI_IZQ = 7; //Velocidad lineal con corrección de trayectoria
 
         public const int MIN_GRADOS_RECTA = 15;
 
@@ -1129,10 +1131,10 @@ namespace Trayectoria
         void ControlVelocidadRobot(int ClientID)
         {
             int ProhibirGiro = 0;
+            const int NUM_MEDIDAS = 1;
             const int GIRO_DERECHA = -1;
             const int GIRO_IZQUIERDA = 1;
-            const int MIN_DISTANCIA_TRAYECTORIA_CONTROL = 5;
-            int NUM_MEDIDAS = 4;
+            const int MIN_DISTANCIA_TRAYECTORIA_CONTROL = 15;
             double Xpos, Ypos;
             double Xant, Yant;
             double[] aXpos = new double[NUM_MEDIDAS];
@@ -1144,6 +1146,7 @@ namespace Trayectoria
             Fases fase = Fases.arranque_inicial;
             long ms_inicio_simulacion = 0;
             double Xini = 0, Yini = 0;
+            double XiniAnt = 0, YiniAnt = 0;
             double VectorDireccionRobot;
             double VectorDireccionAproximacion;
             double VectorDireccionH;
@@ -1191,9 +1194,11 @@ namespace Trayectoria
                 MODULO_MIN_MEDIDA = 9;
                 MODULO_MIN_MEDIDA_AVANCE = 9;
                 DISTANCIA_SALTO_NODO = 25;
+                DISTANCIA_NODO_PARA_VEL_MIN = 25;
                 MIN_MODULO_ACT_POSICION = 9;
                 MAX_VEL_ANG = 3;
-                NUM_MEDIDAS = 1;
+                pbDer.Maximum = (int)MAX_VEL_ANG;
+                pbIzq.Maximum = (int)MAX_VEL_ANG;
             }
             else if (cbRobot.Text == "DANI")
             {
@@ -1205,18 +1210,22 @@ namespace Trayectoria
                 MODULO_MIN_MEDIDA = 9;
                 MODULO_MIN_MEDIDA_AVANCE = 4;
                 DISTANCIA_SALTO_NODO = 60;
+                DISTANCIA_NODO_PARA_VEL_MIN = 70;
                 MIN_MODULO_ACT_POSICION = 14;
                 MAX_VEL_ANG = 20;
-                NUM_MEDIDAS = 4;
+                pbDer.Maximum = (int)MAX_VEL_ANG;
+                pbIzq.Maximum = (int)MAX_VEL_ANG;
             }
             else if (cbRobot.Text == "RODI")
             {
                 MODULO_MIN_MEDIDA = 9;
                 MODULO_MIN_MEDIDA_AVANCE = 4;
                 DISTANCIA_SALTO_NODO = 60;
+                DISTANCIA_NODO_PARA_VEL_MIN = 80;
                 MIN_MODULO_ACT_POSICION = 14;
                 MAX_VEL_ANG = 20;
-                NUM_MEDIDAS = 1;
+                pbDer.Maximum = (int)MAX_VEL_ANG;
+                pbIzq.Maximum = (int)MAX_VEL_ANG;
             }
 
             AsignarVelocidad(0, 0);
@@ -1307,11 +1316,11 @@ namespace Trayectoria
                             lblms.Text = ((DateTimeOffset.Now.ToUnixTimeMilliseconds() - ms)/10).ToString();
                         ms = DateTimeOffset.Now.ToUnixTimeMilliseconds();
 
-				        if (fase == Fases.arranque_inicial)
-				        { //En el arranque debemos avanzar X segundos para poder establecer el vector de dirección
+                        if (fase == Fases.arranque_inicial)
+                        { //En el arranque debemos avanzar X segundos para poder establecer el vector de dirección
                             LOG("arranque_inicial");
                             Xini = Xpos;
-					        Yini = Ypos;
+                            Yini = Ypos;
 
                             if (cbRobot.Text == "DANI")
                             {
@@ -1336,11 +1345,11 @@ namespace Trayectoria
 
                             Espera(TIEMPO_RECORRIDO_INICIAL, 0, OP_INICIAR);
                         }
-			            else if (fase == Fases.establecer_vector_direccion)
-			            {
+                        else if (fase == Fases.establecer_vector_direccion)
+                        {
                             Application.DoEvents();
-				            if (!Espera(TIEMPO_RECORRIDO_INICIAL, 0, OP_ESPERA))
-				            {
+                            if (!Espera(TIEMPO_RECORRIDO_INICIAL, 0, OP_ESPERA))
+                            {
                                 LOG("establecer_vector_direccion");
                                 fase = Fases.iniciar_ruta;
 
@@ -1361,8 +1370,8 @@ namespace Trayectoria
                             }
                         } //Tan(a) = y/x  v=<x1-x2, y1-y2>
                         else if (fase == Fases.iniciar_ruta)
-			            {
-				            double DistanciaNodo = 0;
+                        {
+                            double DistanciaNodo = 0;
                             double ModuloVectorDireccionRobot;
                             //Esperamos a que se estabilice la medida
                             //Espera(1000, 0, OP_INICIAR);
@@ -1448,7 +1457,7 @@ namespace Trayectoria
                                 double h1 = Math.Abs((A * Xpos - Ypos + B)) / Math.Sqrt(Math.Pow(A, 2) + 1);
 
                                 //Calculamos la razón de la intersección de h (fracción entre los dos segmentos que dividen la trayectoria)
-                                double r = (ModSegTray-d) /d;
+                                double r = (ModSegTray - d) / d;
                                 //Obtenemos las coordenadas de la intersección de la altura con la trayectoria
                                 Xd = ((double)NodoAct.Value.X + r * SigNodo.X) / (1 + r);
                                 Yd = ((double)NodoAct.Value.Y + r * SigNodo.Y) / (1 + r);
@@ -1458,12 +1467,13 @@ namespace Trayectoria
                                 DifVectorDireccionH = DifAngular(VectorDireccionTrayectoria, VectorDireccionH);
                             }
 
-                            #region "Dibujar vectores"
+  #region "Dibujar vectores"
                             //Pintamos los dos vectores
-                            PintarVector v1 = new PintarVector();
-                            PintarVector v2 = new PintarVector();
-                            PintarVector v3 = new PintarVector();
-                            PintarVector v4 = new PintarVector();
+                            PintarVector v1 = new PintarVector(); //Vector de orientación del robot en tiempo real
+                            PintarVector v2 = new PintarVector(); //VEctor de aproximación al siguiente nodo
+                            PintarVector v3 = new PintarVector(); //Vector distancia perpendicular a la trayectoria
+                            PintarVector v4 = new PintarVector(); //Vector de alejamiento del nodo anterior
+                            PintarVector v5 = new PintarVector(); //Vector de trayectoria del robot (más largo que el de orientación)
 
                             v1.ini = new Point((int)Xini, (int)Yini);
                             v1.fin = new Point((int)Xpos, (int)Ypos);
@@ -1474,6 +1484,13 @@ namespace Trayectoria
                             v2.color = Color.Blue;
 
                             ListaVectores.Clear();
+                            if (XiniAnt != 0)
+                            {
+                                v5.ini = new Point((int)XiniAnt, (int)YiniAnt);
+                                v5.fin = new Point((int)Xpos, (int)Ypos);
+                                v5.color = Color.LightCyan;
+                                ListaVectores.Add(v5);
+                            }
                             if (NodoAct != null)
                             {
                                 //Inicio de segmento
@@ -1489,14 +1506,14 @@ namespace Trayectoria
                             }
                             ListaVectores.Add(v1);
                             ListaVectores.Add(v2);
-                        #endregion
+  #endregion
 
                             double AngMayor = VectorDireccionAproximacion > VectorDireccionRobot ? VectorDireccionAproximacion : VectorDireccionRobot;
                             DifReal = Math.Abs(DifVector);
 
                             //Si DifVector es + se gira a la derecha, sino a la izquierda. DifReal contiene la diferencia en ángulo siempre +.
-                            myPID.myInput= DifVector;
-					        myPID.Compute();
+                            myPID.myInput = DifVector;
+                            myPID.Compute();
                             //La respuesta del PID debe ser proporcional a la diferencia del ángulo
                             //Cuanto mas pequeño es el ángulo menor peso tiene la parte variable
                             //float Salida = Output / FACTOR_SALIDA;
@@ -1505,12 +1522,7 @@ namespace Trayectoria
 
                             SalidaPID = Margenes(myPID.myOutput, 0, MAX_VALOR_OUT_PID, 0, MAX_VEL_ANG);
 
-                            if (Simulador)
-                                Salida = Margenes(DifReal, 0, 180, 0, MAX_VEL_ANG);
-                            else if (cbRobot.Text == "RODI")
-                                Salida = Margenes(DifReal, 0, 180, 0, MAX_VEL_ANG);
-                            else if (cbRobot.Text == "DANI")
-                                Salida = Margenes(DifReal, 0, 180, 0, MAX_VEL_ANG);
+                            Salida = Margenes(DifReal, 0, 180, 0, MAX_VEL_ANG);
 
                             if ((DifReal < MIN_GRADOS_RECTA) && (Salida < 0.2))
                             {
@@ -1521,8 +1533,8 @@ namespace Trayectoria
                                 }
                                 else if (cbRobot.Text == "RODI")
                                 {
-                                    VelocidadFijaDer = MAX_VEL_FIJA_SIM_RODI;
-                                    VelocidadFijaIzq = MAX_VEL_FIJA_SIM_RODI;
+                                    VelocidadFijaDer = MAX_VEL_RODI_DER;
+                                    VelocidadFijaIzq = MAX_VEL_RODI_IZQ;
                                 }
                                 lblPosOk.ForeColor = Color.Red;
                             }
@@ -1535,8 +1547,8 @@ namespace Trayectoria
                                 }
                                 else if (cbRobot.Text == "RODI")
                                 {
-                                    VelocidadFijaDer = MIN_VEL_FIJA_SIM_RODI;
-                                    VelocidadFijaIzq = MIN_VEL_FIJA_SIM_RODI;
+                                    VelocidadFijaDer = MIN_VEL_RODI_DER;
+                                    VelocidadFijaIzq = MIN_VEL_RODI_IZQ;
                                 }
                                 lblPosOk.ForeColor = Color.Black;
                             }
@@ -1555,17 +1567,38 @@ namespace Trayectoria
                                 if (ModH > MIN_DISTANCIA_TRAYECTORIA_CONTROL)
                                 {
                                     if (DifVectorDireccionH < 0)
+                                    {
                                         ProhibirGiro = GIRO_DERECHA;
+                                        tbDer.BackColor = Color.Red;
+                                        tbIzq.BackColor = Color.White;
+                                    }
                                     else
+                                    {
                                         ProhibirGiro = GIRO_IZQUIERDA;
+                                        tbIzq.BackColor = Color.Red;
+                                        tbDer.BackColor = Color.White;
+                                    }
                                 }
+                                else
+                                {
+                                    tbIzq.BackColor = Color.White;
+                                    tbDer.BackColor = Color.White;
+                                }
+                            }
+                            else
+                            {
+                                tbIzq.BackColor = Color.White;
+                                tbDer.BackColor = Color.White;
                             }
 
                             if ((DifVector > 0))
                             {
                                 VelRuedaDer = VelocidadFijaDer;
                                 if (ProhibirGiro != GIRO_DERECHA)
+                                {
                                     VelRuedaIzq = VelocidadFijaIzq + Salida;
+                                    pbDer.Value = (int)Salida;
+                                }
                                 else
                                     VelRuedaIzq = VelocidadFijaIzq;
                             }
@@ -1573,7 +1606,10 @@ namespace Trayectoria
                             {
                                 VelRuedaIzq = VelocidadFijaIzq;
                                 if (ProhibirGiro != GIRO_IZQUIERDA)
+                                {
                                     VelRuedaDer = VelocidadFijaDer + Salida;
+                                    pbIzq.Value = (int)Salida;
+                                }
                                 else
                                     VelRuedaDer = VelocidadFijaDer;
                             }
@@ -1581,6 +1617,9 @@ namespace Trayectoria
 
                             if (ModuloVectorDireccionRobot > MIN_MODULO_ACT_POSICION)
                             {
+                                XiniAnt = Xini;
+                                YiniAnt = Yini;
+
                                 Xini = Xpos;
                                 Yini = Ypos;
                             }
@@ -1721,6 +1760,8 @@ namespace Trayectoria
 
         private void tmrActualizarPosicion_Tick(object sender, EventArgs e)
         {
+            lblPos.BackColor = lblPosOk.BackColor;
+
             lblms.Text = Puerto.NumeroLecturas.ToString();
             if (chkLecturaCOM.Checked )
                 Console.WriteLine(Puerto.Lectura);
@@ -1872,6 +1913,12 @@ namespace Trayectoria
                 panelLOG.Visible = false;
             else
                 panelLOG.Visible = true;
+
+            if (this.Location.X > 0)
+                panelLOG.Location = new Point(0, 12);
+            else
+                panelLOG.Location = new Point(788, 12);
+
         }
 
         private void LOG(string cad, double d1, double d2, double d3, double d4)
@@ -2069,7 +2116,8 @@ namespace Trayectoria
         private void pbArriba_Click(object sender, EventArgs e)
         {
             if (cmdInicarRobot.Tag.ToString() == "ON")
-                Puerto.serialPort.Write("ava1.");
+                Puerto.serialPort.Write("mot" + ((int)MAX_VEL_RODI_DER).ToString("0##") + "," + ((int)MAX_VEL_RODI_IZQ).ToString("0##") + ".");
+                //Puerto.serialPort.Write("ava1.");
         }
 
         private void pbIzquierda_Click(object sender, EventArgs e)
@@ -2163,7 +2211,9 @@ namespace Trayectoria
         private void pbArribaDespacio_Click(object sender, EventArgs e)
         {
             if (cmdInicarRobot.Tag.ToString() == "ON")
-                Puerto.serialPort.Write("ava0.");
+                //                Puerto.serialPort.Write("ava0.");
+                Puerto.serialPort.Write("mot" + ((int)MIN_VEL_RODI_DER).ToString("0##") + "," + ((int)MIN_VEL_RODI_IZQ).ToString("0##") + ".");
+
         }
 
         private void pbArribaDespacio_MouseDown(object sender, MouseEventArgs e)
@@ -2174,6 +2224,16 @@ namespace Trayectoria
         private void pbArribaDespacio_MouseUp(object sender, MouseEventArgs e)
         {
             ((PictureBox)sender).Size = new Size(30, 19);
+        }
+
+        private void cmdPos0_Click(object sender, EventArgs e)
+        {
+            this.Location = new Point(0, 0);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Location = new Point(600, 0);
         }
 
         private void pbParar_MouseUp(object sender, MouseEventArgs e)

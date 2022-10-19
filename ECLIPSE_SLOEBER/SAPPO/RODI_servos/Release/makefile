@@ -56,7 +56,7 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 AR += \
-D:\GDRIVE\TONI\PROY\SAPPO\ECLIPSE_SLOEBER\SAPPO\RODI_servos\Release\arduino.ar \
+D:\GDRIVE\TONI\PROY\GITHUB\SAPPO\ECLIPSE_SLOEBER\SAPPO\RODI_servos\Release\arduino.ar \
 
 ELF += \
 RODI_servos.elf \
@@ -72,19 +72,19 @@ all: RODI_servos
 RODI_servos: $(HEX)
 	@echo 'Building target: $@'
 	@echo 'Printing size:'
-	"D:\PROGRAMAS\Sloeber\arduinoPlugin\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7/bin/avr-size" -A "D:\GDRIVE\TONI\PROY\SAPPO\ECLIPSE_SLOEBER\SAPPO\RODI_servos\Release/RODI_servos.elf"
+	"D:\PROGRAMAS\Sloeber\arduinoPlugin\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7/bin/avr-size" -A "D:\GDRIVE\TONI\PROY\GITHUB\SAPPO\ECLIPSE_SLOEBER\SAPPO\RODI_servos\Release/RODI_servos.elf"
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-D:\GDRIVE\TONI\PROY\SAPPO\ECLIPSE_SLOEBER\SAPPO\RODI_servos\Release\arduino.ar: $(AR_OBJ)
+D:\GDRIVE\TONI\PROY\GITHUB\SAPPO\ECLIPSE_SLOEBER\SAPPO\RODI_servos\Release\arduino.ar: $(AR_OBJ)
 	@echo 'Starting archiver'
-	"D:\PROGRAMAS\Sloeber\arduinoPlugin\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7/bin/avr-gcc-ar" rcs     D:\GDRIVE\TONI\PROY\SAPPO\ECLIPSE_SLOEBER\SAPPO\RODI_servos\Release/arduino.ar $(AR_OBJ)
+	"D:\PROGRAMAS\Sloeber\arduinoPlugin\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7/bin/avr-gcc-ar" rcs     D:\GDRIVE\TONI\PROY\GITHUB\SAPPO\ECLIPSE_SLOEBER\SAPPO\RODI_servos\Release/arduino.ar $(AR_OBJ)
 	@echo 'Finished building: $@'
 	@echo ' '
 
 RODI_servos.elf: $(LINK_OBJ) $(AR)
 	@echo 'Starting combiner'
-	"D:\PROGRAMAS\Sloeber\arduinoPlugin\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7/bin/avr-gcc" -w -Os -g -flto -fuse-linker-plugin -Wl,--gc-sections,--relax -mmcu=atmega2560   -o "D:\GDRIVE\TONI\PROY\SAPPO\ECLIPSE_SLOEBER\SAPPO\RODI_servos\Release/RODI_servos.elf"   $(LINK_OBJ)    D:\GDRIVE\TONI\PROY\SAPPO\ECLIPSE_SLOEBER\SAPPO\RODI_servos\Release/arduino.ar  "-LD:\GDRIVE\TONI\PROY\SAPPO\ECLIPSE_SLOEBER\SAPPO\RODI_servos\Release" -lm
+	"D:\PROGRAMAS\Sloeber\arduinoPlugin\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7/bin/avr-gcc" -w -Os -g -flto -fuse-linker-plugin -Wl,--gc-sections,--relax -mmcu=atmega2560   -o "D:\GDRIVE\TONI\PROY\GITHUB\SAPPO\ECLIPSE_SLOEBER\SAPPO\RODI_servos\Release/RODI_servos.elf"   $(LINK_OBJ)    D:\GDRIVE\TONI\PROY\GITHUB\SAPPO\ECLIPSE_SLOEBER\SAPPO\RODI_servos\Release/arduino.ar  "-LD:\GDRIVE\TONI\PROY\GITHUB\SAPPO\ECLIPSE_SLOEBER\SAPPO\RODI_servos\Release" -lm
 	@echo 'Finished building: $@'
 	@echo ' '
 

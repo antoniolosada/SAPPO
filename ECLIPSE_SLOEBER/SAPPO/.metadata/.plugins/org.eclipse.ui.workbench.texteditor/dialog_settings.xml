@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="MEDIA_COMPENSADA"/>
+		<item key="selection" value="RecuperarPosicion"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="MEDIA_COMPENSADA"/>
-			<item value="KALMAN"/>
-			<item value="MIN_AVANCE_MOTOR_DER"/>
-			<item value="ret"/>
-			<item value="ret1"/>
-			<item value="MediaX"/>
-			<item value="Serial.print"/>
-			<item value="sensor_baliza"/>
-			<item value="delay"/>
-			<item value="algoKalman"/>
-			<item value="delay("/>
-			<item value="Motor"/>
-			<item value="refresh"/>
+			<item value="RecuperarPosicion"/>
+			<item value="Espera"/>
+			<item value="OP_INICIAR"/>
+			<item value="ID_ROBOT_RODI"/>
+			<item value="paqueteRF433"/>
 			<item value="TIMEOUT_MEDIDA_US"/>
-			<item value="  for (int emisor = 0; emisor &lt; MAX_EMISORES_ULTRASONIDOS; emisor++)"/>
+			<item value="EnviarMensaje433Mhz(0);"/>
+			<item value="input"/>
+			<item value="myFilterX"/>
+			<item value="sensor_baliza"/>
+			<item value="Tiempo2Distancia"/>
+			<item value="SensorEmisor"/>
+			<item value="sBaliza"/>
+			<item value="RODI_SERVOS_H_CARGADA"/>
+			<item value="Lista"/>
 		</list>
 		<list key="replacehistory">
 		</list>

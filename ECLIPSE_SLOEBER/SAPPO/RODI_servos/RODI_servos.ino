@@ -113,7 +113,7 @@ List<sBaliza> ListaBalizas;
 List<sMedidas> ListaMedidasBalizas;
 sProcesoMedida ProcesoMedida;
 
-RF24 radio(9,53);
+RF24 radio(9,53); //CE, CSN
 
 const uint64_t pipe1 = 0x00000000E1LL;    // Usamos este canal
 const uint64_t pipe2 = 0x00000000E2LL;    // Usamos este canal
